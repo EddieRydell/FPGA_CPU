@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  --include "../../../../FPGA_CPU.srcs/sources_1/new" \
+"../../../../FPGA_CPU.srcs/sources_1/new/ALU.sv" \
+"../../../../FPGA_CPU.srcs/sources_1/new/data_memory.sv" \
+"../../../../FPGA_CPU.srcs/sources_1/new/instruction_decoder.sv" \
+"../../../../FPGA_CPU.srcs/sources_1/new/program_memory.sv" \
+"../../../../FPGA_CPU.srcs/sources_1/new/CPU.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
