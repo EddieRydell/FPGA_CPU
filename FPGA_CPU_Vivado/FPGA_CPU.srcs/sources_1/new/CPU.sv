@@ -138,12 +138,6 @@ module CPU (
                     `FUN_JL:
                         if ((flags & `FLAG_SIGN) != (flags & `FLAG_OVERFLOW))
                             program_counter <= memory_immediate;
-                    `FUN_JC:
-                        ;
-                    `FUN_JNC:;
-                    `FUN_JO:;
-                    `FUN_JS:;
-                    `FUN_JNS:;
                 endcase
             `OP_CALL:;
             `OP_RET:;
