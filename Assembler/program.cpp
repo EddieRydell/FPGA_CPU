@@ -1,6 +1,20 @@
 #include "program.h"
 
-void program::add_instruction(const instruction& i) {
+#include <iostream>
+#include <sstream>
+
+void program::add_instruction(const std::string& instruction_string, int line_number) {
+    instruction i;
+    // Catch all parsing errors and handle them all from here
+    // This should ensure that no error handling occurs inside the actual parsing logic
+    try {
+        i = instruction_string;
+    }
+    catch (std::exception& e) {
+        std::stringstream ss;
+        ss << "ERROR: Unable to parse line " << line_number << "\n" << "Message: " << e.what() << "\n";
+        throw std::runtime_error(ss.str());
+    }
     this->instructions.push_back(i);
 }
 

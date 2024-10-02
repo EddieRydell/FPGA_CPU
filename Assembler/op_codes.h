@@ -62,8 +62,6 @@ const std::unordered_map<std::string, int> op_codes = {
         {"ret", OP_RET},
         {"push", OP_PUSH},
         {"pop", OP_POP},
-        {"load", OP_LOAD},
-        {"store", OP_STORE},
         {"syscall", OP_SYSCALL}
 };
 

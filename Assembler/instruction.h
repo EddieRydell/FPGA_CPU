@@ -9,10 +9,9 @@ public:
     instruction() = default;
     instruction(const std::string&);
 
-
 private:
     std::string text;
-    static uint32_t string_to_arg(std::string arg);
+    static std::pair<const char, const uint32_t> string_to_arg(const std::string& arg);
     static std::vector<std::string> split(const std::string&);
 
 protected:

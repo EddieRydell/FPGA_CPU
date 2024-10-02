@@ -8,7 +8,7 @@
 class program {
 public:
     program() = default;
-    void add_instruction(const instruction&);
+    void add_instruction(const std::string&, int line_number);
 
     std::vector<uint8_t> generate_machine_code();
 private:

@@ -16,8 +16,9 @@ int main(int argc, char** argv) {
     program my_program;
 
     std::string curr_line;
+    int line_number = 0;
     while (std::getline(file, curr_line)) {
-        my_program.add_instruction(curr_line);
+        my_program.add_instruction(curr_line, line_number++);
     }
 
     return 0;
