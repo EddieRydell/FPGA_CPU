@@ -90,10 +90,6 @@ std::vector<std::string> instruction::split(const std::string& str) {
 
 std::pair<const char, const uint32_t> instruction::string_to_arg(const std::string& arg) {
     char c = arg[0];
-    // $ prefixes immediate values (actual numbers), so the number is returned
-    // * prefixes an address in memory, so the address is returned (not the value at that address)
-    // # prefixes an address in instruction memory, so that address is returned
-    // % prefixes a register, so the register number is returned
     switch (c) {
         case PREFIX_IMMEDIATE:
         case PREFIX_MEMORY:
