@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 
 void program::add_instruction(const std::string& instruction_string, int line_number) {
     instruction i;
@@ -18,14 +19,27 @@ void program::add_instruction(const std::string& instruction_string, int line_nu
     this->instructions.push_back(i);
 }
 
-std::vector<uint8_t>  program::generate_machine_code() {
-    std::vector<uint8_t> machine_code;
+std::vector<uint8_t> program::generate_machine_code() {
+    std::cout << "instructions size: " << this->instructions.size() << std::endl;
+    std::vector<uint8_t> machine_code(6);
     for (const auto& i : instructions) {
         machine_code.push_back((i.op_code << 4) | i.fun_code);
         machine_code.push_back((i.arg1 << 4) | i.arg2);
         for (const auto& byte : i.immediate) {
-            machine_code.push_back(byte);
+            machine_code.emplace_back(byte);
         }
     }
     return machine_code;
+}
+
+void program::print_machine_code() {
+    const std::vector<uint8_t> bytes = generate_machine_code();
+    for (int i = 0; i < bytes.size(); i++) {
+        std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)bytes.at(i) << " ";
+
+        // Break line after every 6 bytes
+        if (i % 6 == 5) {
+            std::cout << std::endl;
+        }
+    }
 }

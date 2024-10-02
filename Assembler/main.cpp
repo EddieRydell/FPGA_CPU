@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
 
 #include "program.h"
 
@@ -12,6 +13,10 @@ int main(int argc, char** argv) {
     std::string file_name = argv[1];
     std::ifstream file;
     file.open(file_name);
+    if (!file.is_open()) {
+        std::cerr << "ERROR: Failed to open file: " << file_name << std::endl;
+        exit(-1);
+    }
 
     program my_program;
 
@@ -20,6 +25,7 @@ int main(int argc, char** argv) {
     while (std::getline(file, curr_line)) {
         my_program.add_instruction(curr_line, line_number++);
     }
+    my_program.print_machine_code();
 
     return 0;
 }
