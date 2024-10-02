@@ -1,6 +1,6 @@
-#include "instruction.h"
+#include "../headers/instruction.h"
 
-#include "op_codes.h"
+#include "../headers/op_codes.h"
 
 #include <sstream>
 #include <iostream>

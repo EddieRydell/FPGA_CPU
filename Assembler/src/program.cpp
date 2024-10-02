@@ -1,4 +1,4 @@
-#include "program.h"
+#include "../headers/program.h"
 
 #include <iostream>
 #include <sstream>

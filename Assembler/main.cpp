@@ -1,9 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <iomanip>
 
-#include "program.h"
+#include "headers/program.h"
+#include "headers/uart_transmitter.h"
 
 int main(int argc, char** argv) {
     if (argc < 2) {
@@ -26,6 +26,8 @@ int main(int argc, char** argv) {
         my_program.add_instruction(curr_line, line_number++);
     }
     my_program.print_machine_code();
+
+    uart_transmitter tx;
 
     return 0;
 }

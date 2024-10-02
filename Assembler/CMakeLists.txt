@@ -5,8 +5,10 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(Assembler
         main.cpp
-        op_codes.h
-        instruction.cpp
-        instruction.h
-        program.cpp
-        program.h)
+        headers/op_codes.h
+        src/instruction.cpp
+        headers/instruction.h
+        src/program.cpp
+        headers/program.h
+        src/uart_transmitter.cpp
+        headers/uart_transmitter.h)
