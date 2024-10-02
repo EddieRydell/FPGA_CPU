@@ -28,6 +28,7 @@ int main(int argc, char** argv) {
     my_program.print_machine_code();
 
     uart_transmitter tx;
+    tx.initialize();
 
     return 0;
 }

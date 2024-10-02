@@ -8,7 +8,8 @@
 
 #define BAUD_RATE CBR_115200
 
-uart_transmitter::uart_transmitter() {
+void uart_transmitter::initialize() {
+    std::cout << "Initializing UART transmitter...\n";
     std::vector<std::string> com_ports = list_com_ports();
     for (const auto& i : com_ports) {
         if (probe_com_port(i)) {
@@ -16,6 +17,7 @@ uart_transmitter::uart_transmitter() {
             break;
         }
     }
+    std::cout << "UART initialization done\n";
 }
 
 void uart_transmitter::setup_serial(const char* com_port) {
@@ -84,14 +86,15 @@ uart_transmitter::~uart_transmitter() {
 
 // Function to list all available COM ports
 std::vector<std::string> uart_transmitter::list_com_ports() {
+    std::cout << "Listing all COM ports...\n";
     std::vector<std::string> com_ports;
 
     // Get the list of all devices in the Ports (COM & LPT) class
-    HDEVINFO hDevInfo = SetupDiGetClassDevs(&GUID_DEVCLASS_PORTS, nullptr, nullptr, DIGCF_PRESENT);
+    HDEVINFO hDevInfo = SetupDiGetClassDevs(&GUID_DEVCLASS_PORTS, nullptr, nullptr, DIGCF_ALLCLASSES);
     if (hDevInfo == INVALID_HANDLE_VALUE) {
-        return com_ports; // Return empty if we can't get device information
+        std::cerr << "ERROR: Unable to find device info for COM and LPT ports\n";
+        return com_ports;
     }
-
     SP_DEVINFO_DATA DeviceInfoData;
     DeviceInfoData.cbSize = sizeof(SP_DEVINFO_DATA);
 
@@ -113,12 +116,17 @@ std::vector<std::string> uart_transmitter::list_com_ports() {
         }
     }
 
-    SetupDiDestroyDeviceInfoList(hDevInfo); // Cleanup
+    SetupDiDestroyDeviceInfoList(hDevInfo);
+    std::cout << "Found ports:\n";
+    for (const auto& i : com_ports) {
+        std::cout << i << std::endl;
+    }
     return com_ports;
 }
 
 bool uart_transmitter::probe_com_port(const std::string& com_port) const {
     std::string full_com_port = R"(\\.\)" + com_port; // "\\.\COMx" format for Windows
+    std::cout << "Attempting to probe COM port: " << com_port << std::endl;
 
     HANDLE hSerial = CreateFile(full_com_port.c_str(),
                                 GENERIC_READ | GENERIC_WRITE,
@@ -129,24 +137,43 @@ bool uart_transmitter::probe_com_port(const std::string& com_port) const {
                                 nullptr);
 
     if (hSerial == INVALID_HANDLE_VALUE) {
-        // std::cerr << "Failed to open " << com_port << std::endl;
+        DWORD error = GetLastError();
+        std::cerr << "Failed to open " << com_port << ". Error Code: " << error << std::endl;
         return false;
     }
 
     const std::string ping_message = "PING";
     const std::vector<uint8_t> message(ping_message.begin(), ping_message.end());
     std::cout << "Attempting to ping FPGA\n";
+    // Send out the message "PING", then wait for the response from the FPGA, which should be "ACK"
     try {
         send_bytes(message);
+
+        // Wait and read the response from the FPGA
+        char response[4];
+        DWORD bytes_read;
+        BOOL success = ReadFile(hSerial, response, sizeof(response) - 1, &bytes_read, nullptr);
+
+        if (success && bytes_read > 0) {
+            response[bytes_read] = '\0';
+
+            if (strcmp(response, "ACK") == 0) {
+                std::cout << "FPGA detected on " << com_port << std::endl;
+                CloseHandle(hSerial);
+                return true;
+            }
+        }
+        std::cerr << "No valid response from FPGA on COM port: " << com_port << std::endl;
+
     }
     catch (std::runtime_error&) {
         std::cerr << "Failed to find FPGA on COM port: " << com_port;
         return false;
     }
 
-
-
     CloseHandle(hSerial);
     return true;
 }
+
+
 

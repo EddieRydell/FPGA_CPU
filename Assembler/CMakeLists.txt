@@ -12,3 +12,18 @@ add_executable(Assembler
         headers/program.h
         src/uart_transmitter.cpp
         headers/uart_transmitter.h)
+
+# Link with required Windows libraries
+target_link_libraries(Assembler
+        kernel32
+        user32
+        gdi32
+        winspool
+        shell32
+        ole32
+        oleaut32
+        uuid
+        comdlg32
+        advapi32
+        setupapi
+)
