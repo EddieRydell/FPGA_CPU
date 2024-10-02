@@ -5,6 +5,11 @@
 #include <sstream>
 #include <iostream>
 
+#define PREFIX_IMMEDIATE '$'
+#define PREFIX_MEMORY '*'
+#define PREFIX_INSTRUCTION '#'
+#define PREFIX_REGISTER '%'
+
 instruction::instruction(const std::string& text) {
     this->text = text;
     std::vector<std::string> tokens = split(text);
@@ -43,16 +48,16 @@ instruction::instruction(const std::string& text) {
         char arg1_prefix = arg1_converted.first;
         char arg2_prefix = arg2_converted.first;
 
-        if (arg1_prefix == '$' && arg2_prefix == '%') {
+        if (arg1_prefix == PREFIX_IMMEDIATE && arg2_prefix == PREFIX_REGISTER) {
             fun_code = mov_operations.at("mov_ir");
         }
-        else if (arg1_prefix == '%' && arg2_prefix == '%') {
+        else if (arg1_prefix == PREFIX_REGISTER && arg2_prefix == PREFIX_REGISTER) {
             fun_code = mov_operations.at("mov_rr");
         }
-        else if (arg1_prefix == '%' && arg2_prefix == '*') {
+        else if (arg1_prefix == PREFIX_REGISTER && arg2_prefix == PREFIX_MEMORY) {
             fun_code = mov_operations.at("mov_rm");
         }
-        else if (arg1_prefix == '*' && arg2_prefix == '%') {
+        else if (arg1_prefix == PREFIX_MEMORY && arg2_prefix == PREFIX_REGISTER) {
             fun_code = mov_operations.at("mov_mr");
         }
         else {
@@ -90,11 +95,11 @@ std::pair<const char, const uint32_t> instruction::string_to_arg(const std::stri
     // # prefixes an address in instruction memory, so that address is returned
     // % prefixes a register, so the register number is returned
     switch (c) {
-        case '$':
-        case '*':
-        case '#':
+        case PREFIX_IMMEDIATE:
+        case PREFIX_MEMORY:
+        case PREFIX_INSTRUCTION:
             return {c, std::stoi(arg.substr(1))};
-        case '%':
+        case PREFIX_REGISTER:
             return {c, std::stoi(arg.substr(2))};
         default:
             throw std::runtime_error("Failed to parse argument in instruction");
