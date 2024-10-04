@@ -7,6 +7,7 @@
 #include <setupapi.h>
 
 #define BAUD_RATE CBR_115200
+#define UART_CHUNK_SIZE 6       // 48 bit instruction size
 
 void uart_transmitter::initialize() {
     std::cout << "Initializing UART transmitter...\n";
@@ -68,14 +69,20 @@ void uart_transmitter::setup_serial(const char* com_port) {
 
 void uart_transmitter::send_bytes(const std::vector<uint8_t>& data) const {
     DWORD bytes_written;
-    BOOL success = WriteFile(serial_handle, data.data(), data.size(), &bytes_written, NULL);
 
-    if (!success) {
-        throw std::runtime_error("Error writing to COM port");
+    if (data.size() % UART_CHUNK_SIZE != 0) {
+        throw std::runtime_error("Data size is not a multiple of 6 bytes!");
     }
-    else {
-        std::cout << "Sent " << bytes_written << " bytes to the FPGA." << std::endl;
+
+    for (size_t i = 0; i < data.size(); i += UART_CHUNK_SIZE) {
+        BOOL success = WriteFile(serial_handle, data.data() + i, UART_CHUNK_SIZE, &bytes_written, nullptr);
+
+        if (!success || (bytes_written != UART_CHUNK_SIZE)) {
+            throw std::runtime_error("Error writing instruction to COM port");
+        }
     }
+
+    std::cout << "All instructions sent." << std::endl;
 }
 
 uart_transmitter::~uart_transmitter() {
