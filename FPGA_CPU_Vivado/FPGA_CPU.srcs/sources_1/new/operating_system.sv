@@ -22,14 +22,26 @@ module operating_system(
         .data_ready(rx_data_ready)
     );
     
+    logic tx_send;
+    logic [47:0] tx_in;
+    logic tx_busy;
     serial_transmitter serial_transmitter (
-        
+        .clk(clk),
+        .reset(reset),
+        .send(tx_send),
+        .data_in(tx_in),
+        .tx(tx),
+        .busy(tx_busy)
     );
+    
+    logic [47:0] PING_STRING = {8'h2E, 8'h50, 8'h49, 8'h4E, 8'h47, 8'h2E}; // ".PING."
+    logic [47:0] ACK_STRING = {8'h41, 8'h43, 8'h4B, 8'h41, 8'h43, 8'h4B};  // "ACKACK"
     
     typedef enum logic[2:0] {
         RESET = 0,
         INIT_HANDSHAKE_RECEIVING,
         INIT_HANDSHAKE_WAITING,
+        INIT_HANDSHAKE_START_TRANSMITTING,
         INIT_HANDSHAKE_TRANSMITTING,
         INIT_RECEIVING_PROGRAM,
         RUNNING,
@@ -48,14 +60,26 @@ module operating_system(
                 next_state = INIT_HANDSHAKE_WAITING;
                 tx <= 0;
             end
-            INIT_HANDSHAKE_WAITING: begin
+            
+            INIT_HANDSHAKE_WAITING:
+                if (rx) next_state <= INIT_HANDSHAKE_RECEIVING;
                 
+            INIT_HANDSHAKE_RECEIVING:
+                if (rx_data_ready && rx_out == PING_STRING)
+                    next_state <= INIT_HANDSHAKE_TRANSMITTING;
+                    
+            INIT_HANDSHAKE_TRANSMITTING: begin
+                tx_in <= ACK_STRING;
+                tx_send <= 1;
+                if (
             end
-            INIT_HANDSHAKE_RECEIVING:;
-            INIT_HANDSHAKE_TRANSMITTING:;
+            
             INIT_RECEIVING_PROGRAM:;
+            
             RUNNING:;
+            
             HALTED:;
+            
         endcase
         end
     end
