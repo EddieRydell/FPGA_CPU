@@ -46,7 +46,7 @@ module serial_receiver #(
 
                     if (bit_counter < 48) begin
                         // Shift the received bit into the shift register
-                        shift_reg <= {rx, shift_reg[47:1]}; // Shift right
+                        shift_reg <= {rx, shift_reg[47:1]};
                         bit_counter <= bit_counter + 1;
                     end 
                     else begin
