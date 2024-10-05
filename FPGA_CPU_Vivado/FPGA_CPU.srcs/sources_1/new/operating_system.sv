@@ -4,7 +4,8 @@ module operating_system(
     input logic clk,
     input logic reset,
     input logic rx,
-    output logic tx
+    output logic tx,
+    output logic LED_1
     );
     
     CPU CPU1 (
@@ -53,25 +54,35 @@ module operating_system(
         if (reset) begin 
             system_state <= RESET;
             next_state <= RESET;
+            LED_1 <= 1;
         end
         else begin
+        system_state <= next_state;
         case (system_state)
             RESET: begin
-                next_state = INIT_HANDSHAKE_WAITING;
-                tx <= 0;
+                next_state <= INIT_HANDSHAKE_WAITING;
+                LED_1 <= 0;
             end
             
-            INIT_HANDSHAKE_WAITING:
-                if (rx) next_state <= INIT_HANDSHAKE_RECEIVING;
-                
+            INIT_HANDSHAKE_WAITING: begin
+                if (!rx) next_state <= INIT_HANDSHAKE_RECEIVING;
+            end
+            
             INIT_HANDSHAKE_RECEIVING:
-                if (rx_data_ready && rx_out == PING_STRING)
-                    next_state <= INIT_HANDSHAKE_TRANSMITTING;
+                if (rx_data_ready)
+                    if (rx_out == PING_STRING)
+                        next_state <= INIT_HANDSHAKE_START_TRANSMITTING;
+                    else next_state = INIT_HANDSHAKE_WAITING;
                     
-            INIT_HANDSHAKE_TRANSMITTING: begin
+            INIT_HANDSHAKE_START_TRANSMITTING: begin
                 tx_in <= ACK_STRING;
                 tx_send <= 1;
-                if (
+            end
+            
+            INIT_HANDSHAKE_TRANSMITTING: begin
+                tx_send <= 0;
+                if (!tx_busy)
+                    next_state <= INIT_RECEIVING_PROGRAM;
             end
             
             INIT_RECEIVING_PROGRAM:;
