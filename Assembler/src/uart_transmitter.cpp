@@ -148,6 +148,7 @@ bool uart_transmitter::probe_com_port(const std::string& com_port) const {
         std::cerr << "Failed to open " << com_port << ". Error Code: " << error << std::endl;
         return false;
     }
+    std::cout << "Successfully connected on port" << com_port << std::endl;
 
     const std::string ping_message = "PING";
     const std::vector<uint8_t> message(ping_message.begin(), ping_message.end());
