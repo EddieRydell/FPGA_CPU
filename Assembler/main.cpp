@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
     while (std::getline(file, curr_line)) {
         my_program.add_instruction(curr_line, line_number++);
     }
-    my_program.print_machine_code();
+    //my_program.print_machine_code();
 
     uart_transmitter tx;
     tx.initialize();

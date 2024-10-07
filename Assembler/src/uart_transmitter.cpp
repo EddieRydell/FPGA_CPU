@@ -8,6 +8,9 @@
 
 #define BAUD_RATE CBR_115200
 #define UART_CHUNK_SIZE 6       // 48 bit instruction size
+#define PING_STRING ".PING."
+#define ACK_STRING "ACKACK"
+
 
 void uart_transmitter::initialize() {
     std::cout << "Initializing UART transmitter...\n";
@@ -44,9 +47,9 @@ void uart_transmitter::setup_serial(const char* com_port) {
     }
 
     dcbSerialParams.BaudRate = BAUD_RATE;
-    dcbSerialParams.ByteSize = 8;             // 8 data bits
-    dcbSerialParams.StopBits = ONESTOPBIT;    // 1 stop bit
-    dcbSerialParams.Parity = NOPARITY;        // No parity
+    dcbSerialParams.ByteSize = UART_CHUNK_SIZE * CHAR_BIT;
+    dcbSerialParams.StopBits = ONESTOPBIT;
+    dcbSerialParams.Parity = NOPARITY;
 
     if (!SetCommState(hSerial, &dcbSerialParams)) {
         CloseHandle(hSerial);
@@ -67,22 +70,19 @@ void uart_transmitter::setup_serial(const char* com_port) {
     serial_handle = hSerial;
 }
 
-void uart_transmitter::send_bytes(const std::vector<uint8_t>& data) const {
+void uart_transmitter::send_bytes(HANDLE hSerial, const std::vector<uint8_t>& data) {
     DWORD bytes_written;
-
+    std::cout << "Sending bytes..." << std::endl;
     if (data.size() % UART_CHUNK_SIZE != 0) {
-        throw std::runtime_error("Data size is not a multiple of 6 bytes!");
+        throw std::runtime_error("Data size is not a multiple of 6 bytes");
     }
 
     for (size_t i = 0; i < data.size(); i += UART_CHUNK_SIZE) {
-        BOOL success = WriteFile(serial_handle, data.data() + i, UART_CHUNK_SIZE, &bytes_written, nullptr);
-
+        BOOL success = WriteFile(hSerial, data.data() + i, UART_CHUNK_SIZE, &bytes_written, nullptr);
         if (!success || (bytes_written != UART_CHUNK_SIZE)) {
             throw std::runtime_error("Error writing instruction to COM port");
         }
     }
-
-    std::cout << "All instructions sent." << std::endl;
 }
 
 uart_transmitter::~uart_transmitter() {
@@ -97,7 +97,7 @@ std::vector<std::string> uart_transmitter::list_com_ports() {
     std::vector<std::string> com_ports;
 
     // Get the list of all devices in the Ports (COM & LPT) class
-    HDEVINFO hDevInfo = SetupDiGetClassDevs(&GUID_DEVCLASS_PORTS, nullptr, nullptr, DIGCF_ALLCLASSES);
+    HDEVINFO hDevInfo = SetupDiGetClassDevs(&GUID_DEVCLASS_PORTS, nullptr, nullptr, DIGCF_PRESENT);
     if (hDevInfo == INVALID_HANDLE_VALUE) {
         std::cerr << "ERROR: Unable to find device info for COM and LPT ports\n";
         return com_ports;
@@ -118,7 +118,9 @@ std::vector<std::string> uart_transmitter::list_com_ports() {
             // Find and extract the COM port number from the friendly name
             size_t com_pos = com_port_name.find("COM");
             if (com_pos != std::string::npos) {
-                com_ports.push_back(com_port_name.substr(com_pos));
+                std::string friendly_com_name = com_port_name.substr(com_pos);
+                friendly_com_name.pop_back(); // remove the trailing parenthesis
+                com_ports.push_back(friendly_com_name);
             }
         }
     }
@@ -131,7 +133,7 @@ std::vector<std::string> uart_transmitter::list_com_ports() {
     return com_ports;
 }
 
-bool uart_transmitter::probe_com_port(const std::string& com_port) const {
+bool uart_transmitter::probe_com_port(const std::string& com_port) {
     std::string full_com_port = R"(\\.\)" + com_port; // "\\.\COMx" format for Windows
     std::cout << "Attempting to probe COM port: " << com_port << std::endl;
 
@@ -148,24 +150,26 @@ bool uart_transmitter::probe_com_port(const std::string& com_port) const {
         std::cerr << "Failed to open " << com_port << ". Error Code: " << error << std::endl;
         return false;
     }
-    std::cout << "Successfully connected on port" << com_port << std::endl;
+    std::cout << "Successfully connected on port " << com_port << std::endl;
 
-    const std::string ping_message = "PING";
+    const std::string ping_message = PING_STRING;
     const std::vector<uint8_t> message(ping_message.begin(), ping_message.end());
-    std::cout << "Attempting to ping FPGA\n";
-    // Send out the message "PING", then wait for the response from the FPGA, which should be "ACK"
+    std::cout << "Attempting to ping FPGA..." << std::endl;
+    // Send out the message ".PING.", then wait for the response from the FPGA, which should be "ACKACK"
     try {
-        send_bytes(message);
+        send_bytes(hSerial, message);
 
         // Wait and read the response from the FPGA
-        char response[4];
+        char response[7];
         DWORD bytes_read;
         BOOL success = ReadFile(hSerial, response, sizeof(response) - 1, &bytes_read, nullptr);
+        std::cout << "Received response from FPGA" << std::endl;
 
         if (success && bytes_read > 0) {
             response[bytes_read] = '\0';
+            std::cout << response << std::endl;
 
-            if (strcmp(response, "ACK") == 0) {
+            if (strcmp(response, ACK_STRING) == 0) {
                 std::cout << "FPGA detected on " << com_port << std::endl;
                 CloseHandle(hSerial);
                 return true;
@@ -174,8 +178,9 @@ bool uart_transmitter::probe_com_port(const std::string& com_port) const {
         std::cerr << "No valid response from FPGA on COM port: " << com_port << std::endl;
 
     }
-    catch (std::runtime_error&) {
+    catch (std::runtime_error& e) {
         std::cerr << "Failed to find FPGA on COM port: " << com_port;
+        std::cerr << ". Message: " << e.what() << std::endl;
         return false;
     }
 
