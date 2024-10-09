@@ -2,7 +2,11 @@
 
 module CPU (
     input logic clk,
-    input logic reset
+    input logic reset,
+    input logic [31:0] instruction_write_address,       // Input for write address from OS
+    input logic [47:0] instruction_write_data,          // Input for write data from OS
+    input logic instruction_write_enable,                // Input for write enable from OS
+    input logic run
     );
     
     // Registers and Program Counter
@@ -12,13 +16,13 @@ module CPU (
     
     // FETCH
     logic[47:0] fetch_instruction;
-    program_memory #(
-        .MEMORY_DEPTH(256)
-        ) 
-        program_memory (
-            .program_counter(program_counter),
-            .instruction(fetch_instruction)
-        );
+    instruction_memory #(.MEMORY_DEPTH(256)) instruction_memory (
+        .program_counter(program_counter),    // Program counter for fetch
+        .write_address(instruction_write_address),        // Write address from OS
+        .write_data(instruction_write_data),              // Write data from OS
+        .write_enable(instruction_write_enable),          // Write enable from OS
+        .instruction(fetch_instruction)       // Fetched instruction to CPU
+    );
     
     // DECODE
     logic[47:0] decode_instruction;
@@ -79,7 +83,9 @@ module CPU (
     always_ff @(posedge clk) begin
         if (reset) begin
             program_counter <= 0;
-        end else begin
+        end 
+        else if (!run);
+        else begin
         // FETCH
         decode_instruction <= fetch_instruction;
         
