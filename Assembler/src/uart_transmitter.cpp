@@ -8,8 +8,6 @@
 
 #define BAUD_RATE CBR_115200
 #define UART_CHUNK_SIZE 6       // 48 bit instruction size
-#define PING_STRING ".PING."
-#define ACK_STRING "ACKACK"
 
 
 void uart_transmitter::initialize() {
@@ -17,7 +15,7 @@ void uart_transmitter::initialize() {
     std::vector<std::string> com_ports = list_com_ports();
     for (const auto& i : com_ports) {
         if (probe_com_port(i)) {
-            setup_serial(i.c_str());
+            std::cout << "Found FPGA on port " << i << std::endl;
             break;
         }
     }
@@ -25,6 +23,7 @@ void uart_transmitter::initialize() {
 }
 
 void uart_transmitter::setup_serial(const char* com_port) {
+    std::cout << "Setting up serial port on " << com_port << std::endl;
     // Open the serial port
     HANDLE hSerial = CreateFile(com_port,
                                 GENERIC_READ | GENERIC_WRITE,
@@ -47,7 +46,7 @@ void uart_transmitter::setup_serial(const char* com_port) {
     }
 
     dcbSerialParams.BaudRate = BAUD_RATE;
-    dcbSerialParams.ByteSize = UART_CHUNK_SIZE * CHAR_BIT;
+    dcbSerialParams.ByteSize = 8;             // Set ByteSize to 8 bits (1 byte)
     dcbSerialParams.StopBits = ONESTOPBIT;
     dcbSerialParams.Parity = NOPARITY;
 
@@ -68,19 +67,17 @@ void uart_transmitter::setup_serial(const char* com_port) {
         throw std::runtime_error("Error setting timeouts");
     }
     serial_handle = hSerial;
+    std::cout << "Successfully connected on port " << com_port << std::endl;
 }
 
 void uart_transmitter::send_bytes(HANDLE hSerial, const std::vector<uint8_t>& data) {
     DWORD bytes_written;
     std::cout << "Sending bytes..." << std::endl;
-    if (data.size() % UART_CHUNK_SIZE != 0) {
-        throw std::runtime_error("Data size is not a multiple of 6 bytes");
-    }
 
     for (size_t i = 0; i < data.size(); i += UART_CHUNK_SIZE) {
         BOOL success = WriteFile(hSerial, data.data() + i, UART_CHUNK_SIZE, &bytes_written, nullptr);
         if (!success || (bytes_written != UART_CHUNK_SIZE)) {
-            throw std::runtime_error("Error writing instruction to COM port");
+            throw std::runtime_error("Error writing byte to COM port");
         }
     }
 }
@@ -137,41 +134,26 @@ bool uart_transmitter::probe_com_port(const std::string& com_port) {
     std::string full_com_port = R"(\\.\)" + com_port; // "\\.\COMx" format for Windows
     std::cout << "Attempting to probe COM port: " << com_port << std::endl;
 
-    HANDLE hSerial = CreateFile(full_com_port.c_str(),
-                                GENERIC_READ | GENERIC_WRITE,
-                                0,
-                                nullptr,
-                                OPEN_EXISTING,
-                                0,
-                                nullptr);
+    setup_serial(com_port.c_str());
 
-    if (hSerial == INVALID_HANDLE_VALUE) {
-        DWORD error = GetLastError();
-        std::cerr << "Failed to open " << com_port << ". Error Code: " << error << std::endl;
-        return false;
-    }
-    std::cout << "Successfully connected on port " << com_port << std::endl;
-
-    const std::string ping_message = PING_STRING;
-    const std::vector<uint8_t> message(ping_message.begin(), ping_message.end());
+    const std::vector<uint8_t> message(1, 'P');
     std::cout << "Attempting to ping FPGA..." << std::endl;
-    // Send out the message ".PING.", then wait for the response from the FPGA, which should be "ACKACK"
+    // Send out the message 'P', then wait for the response from the FPGA, which should be "A"
     try {
-        send_bytes(hSerial, message);
+        send_bytes(serial_handle, message);
 
         // Wait and read the response from the FPGA
-        char response[7];
+        char response;
         DWORD bytes_read;
-        BOOL success = ReadFile(hSerial, response, sizeof(response) - 1, &bytes_read, nullptr);
-        std::cout << "Received response from FPGA" << std::endl;
-
+        BOOL success = ReadFile(serial_handle, &response, 1, &bytes_read, nullptr);
+        if (!success) {
+            DWORD error = GetLastError();
+            printf("ReadFile failed with error code: %ld\n", error);
+        }
         if (success && bytes_read > 0) {
-            response[bytes_read] = '\0';
-            std::cout << response << std::endl;
-
-            if (strcmp(response, ACK_STRING) == 0) {
+            std::cout << "Received response from FPGA: " << std::hex << response << std::endl;
+            if (response == 'A') {
                 std::cout << "FPGA detected on " << com_port << std::endl;
-                CloseHandle(hSerial);
                 return true;
             }
         }
@@ -184,7 +166,7 @@ bool uart_transmitter::probe_com_port(const std::string& com_port) {
         return false;
     }
 
-    CloseHandle(hSerial);
+    CloseHandle(serial_handle);
     return true;
 }
 

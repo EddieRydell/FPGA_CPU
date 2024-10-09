@@ -3,17 +3,29 @@
 module operating_system(
     input logic clk,
     input logic reset,
+    input logic btnu,
     input logic rx,
     output logic tx,
     output logic LED_1
     );
     
+    logic [5:0] instruction_byte_counter;
+    logic [47:0] instruction_buffer;
+    
+    logic [31:0] instruction_write_address;
+    logic [47:0] instruction_write_data;
+    logic instruction_write_enable;
+    logic cpu_run;
     CPU CPU1 (
         .clk(clk),
-        .reset(reset)
+        .reset(reset),
+        .instruction_write_address(instruction_write_address),
+        .instruction_write_data(instruction_write_data),
+        .instruction_write_enable(instruction_write_enable),
+        .run(cpu_run)
     );
     
-    logic [47:0] rx_out;
+    logic [7:0] rx_out;
     logic rx_data_ready;
     serial_receiver serial_receiver (
         .clk(clk),
@@ -24,7 +36,7 @@ module operating_system(
     );
     
     logic tx_send;
-    logic [47:0] tx_in;
+    logic [7:0] tx_in;
     logic tx_busy;
     serial_transmitter serial_transmitter (
         .clk(clk),
@@ -35,9 +47,6 @@ module operating_system(
         .busy(tx_busy)
     );
     
-    logic [47:0] PING_STRING = {8'h2E, 8'h50, 8'h49, 8'h4E, 8'h47, 8'h2E}; // ".PING."
-    logic [47:0] ACK_STRING = {8'h41, 8'h43, 8'h4B, 8'h41, 8'h43, 8'h4B};  // "ACKACK"
-    
     typedef enum logic[2:0] {
         RESET = 0,
         INIT_HANDSHAKE_RECEIVING,
@@ -45,54 +54,74 @@ module operating_system(
         INIT_HANDSHAKE_START_TRANSMITTING,
         INIT_HANDSHAKE_TRANSMITTING,
         INIT_RECEIVING_PROGRAM,
-        RUNNING,
-        HALTED
+        PROGRAM_WAITING,
+        PROGRAM_RUNNING,
+        PROGRAM_HALTED
     } state;
     state system_state;
     state next_state;
+    
     always_ff @(posedge clk) begin
-        if (reset) begin 
-            system_state <= RESET;
-            next_state <= RESET;
-            LED_1 <= 1;
-        end
-        else begin
-        system_state <= next_state;
+    if (reset) begin
+        system_state <= RESET;
+        LED_1 <= 1;
+        tx_send <= 0;
+        tx_in <= 0;
+        cpu_run <= 0;
+    end
+    else begin
         case (system_state)
             RESET: begin
-                next_state <= INIT_HANDSHAKE_WAITING;
+                system_state <= INIT_HANDSHAKE_WAITING;
                 LED_1 <= 0;
             end
             
             INIT_HANDSHAKE_WAITING: begin
-                if (!rx) next_state <= INIT_HANDSHAKE_RECEIVING;
+                if (!rx) system_state <= INIT_HANDSHAKE_RECEIVING;
             end
             
             INIT_HANDSHAKE_RECEIVING:
                 if (rx_data_ready)
-                    if (rx_out == PING_STRING)
-                        next_state <= INIT_HANDSHAKE_START_TRANSMITTING;
-                    else next_state = INIT_HANDSHAKE_WAITING;
+                    if (rx_out == 8'h50) // 'P'
+                        system_state <= INIT_HANDSHAKE_START_TRANSMITTING;
+                    else system_state <= INIT_HANDSHAKE_WAITING;
                     
             INIT_HANDSHAKE_START_TRANSMITTING: begin
-                tx_in <= ACK_STRING;
+                tx_in <= 8'h41; // 'A'
                 tx_send <= 1;
+                system_state <= INIT_HANDSHAKE_TRANSMITTING;
             end
             
             INIT_HANDSHAKE_TRANSMITTING: begin
                 tx_send <= 0;
                 if (!tx_busy)
-                    next_state <= INIT_RECEIVING_PROGRAM;
+                    system_state <= INIT_RECEIVING_PROGRAM;
             end
             
-            INIT_RECEIVING_PROGRAM:;
-            
-            RUNNING:;
-            
-            HALTED:;
+            INIT_RECEIVING_PROGRAM: begin
+                if (rx_data_ready) begin
+                    instruction_buffer <= {instruction_buffer[39:0], rx_out};  // Shift in byte
+                    instruction_byte_counter <= instruction_byte_counter + 1;
+                    if (instruction_byte_counter == 5) begin
+                        instruction_write_data <= instruction_buffer;  // Load buffer into write_data
+                        instruction_write_enable <= 1;                // Enable memory write
+                        instruction_write_address <= instruction_write_address + 1;  // Increment write address
+                        instruction_byte_counter <= 0;
+                    end 
+                    else begin
+                        if (instruction_buffer == '1) system_state <= PROGRAM_WAITING;
+                        instruction_write_enable <= 0;  // Disable memory write until instruction is complete
+                    end
+                end
+            end
+            PROGRAM_WAITING:
+                if (btnu) system_state <= PROGRAM_RUNNING;
+            PROGRAM_RUNNING:
+                cpu_run <= 1;
+            PROGRAM_HALTED:; 
             
         endcase
-        end
+    end
     end
     
 endmodule

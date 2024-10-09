@@ -1,13 +1,13 @@
 `timescale 1ns / 1ps
 
 module serial_receiver #(
-    parameter CLOCK_FREQ = 50000000,   // 50 MHz clock
+    parameter CLOCK_FREQ = 100000000,
     parameter BAUD_RATE = 115200
 )(
     input logic clk,                   // System clock
     input logic reset,                 // Reset signal
     input logic rx,                    // Serial data input (UART RX)
-    output logic [47:0] data_out,      // 48-bit parallel output
+    output logic [7:0] data_out,      // 48-bit parallel output
     output logic data_ready            // Data ready flag
     );
 
@@ -15,8 +15,8 @@ module serial_receiver #(
     localparam integer BAUD_TICK = CLOCK_FREQ / BAUD_RATE;
 
     logic [15:0] baud_counter;         // Counter for baud rate timing
-    logic [5:0] bit_counter;           // Counts up to 48 bits (6 bytes)
-    logic [47:0] shift_reg;            // Shift register for receiving data
+    logic [3:0] bit_counter;           // Counts up to 8 bits
+    logic [7:0] shift_reg;            // Shift register for receiving data
     logic rx_prev;                     // Used for start bit detection
     logic receiving;                   // Indicates reception is in progress
 
@@ -26,7 +26,7 @@ module serial_receiver #(
             baud_counter <= 0;
             bit_counter <= 0;
             data_ready <= 0;
-            shift_reg <= 48'b0;        // Clear shift register
+            shift_reg <= 8'b0;        // Clear shift register
             receiving <= 0;
             rx_prev <= 1;              // Assume idle state (rx high)
         end 
@@ -44,13 +44,13 @@ module serial_receiver #(
                 if (baud_counter == 0) begin
                     baud_counter <= BAUD_TICK - 1;  // Reset baud counter
 
-                    if (bit_counter < 48) begin
+                    if (bit_counter <= 8) begin
                         // Shift the received bit into the shift register
-                        shift_reg <= {rx, shift_reg[47:1]};
+                        shift_reg <= {rx, shift_reg[7:1]};
                         bit_counter <= bit_counter + 1;
                     end 
                     else begin
-                        // 48 bits received, stop receiving and output data
+                        // 8 bits received, stop receiving and output data
                         data_out <= shift_reg;
                         data_ready <= 1;
                         receiving <= 0;

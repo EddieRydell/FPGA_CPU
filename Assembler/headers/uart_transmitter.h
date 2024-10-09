@@ -14,7 +14,7 @@ public:
     static void send_bytes(HANDLE hSerial, const std::vector<uint8_t>& data) ;
 
 private:
-    static bool probe_com_port(const std::string& com_port) ;
+    bool probe_com_port(const std::string& com_port) ;
     static std::vector<std::string> list_com_ports();
     void setup_serial(const char* com_port);
     HANDLE serial_handle = nullptr;
