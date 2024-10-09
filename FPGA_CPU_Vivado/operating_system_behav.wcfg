@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="operating_system_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="operating_system" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="64.305120 us"></ZoomStartTime>
+      <ZoomEndTime time="130.107668 us"></ZoomEndTime>
+      <Cursor1Time time="209.000000 us"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="240"></NameColumnWidth>
+      <ValueColumnWidth column_width="146"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="38" />
+   <wvobject fp_name="/operating_system/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/rx" type="logic">
+      <obj_property name="ElementShortName">rx</obj_property>
+      <obj_property name="ObjectShortName">rx</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/tx" type="logic">
+      <obj_property name="ElementShortName">tx</obj_property>
+      <obj_property name="ObjectShortName">tx</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/LED_1" type="logic">
+      <obj_property name="ElementShortName">LED_1</obj_property>
+      <obj_property name="ObjectShortName">LED_1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/rx_out" type="array">
+      <obj_property name="ElementShortName">rx_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/rx_data_ready" type="logic">
+      <obj_property name="ElementShortName">rx_data_ready</obj_property>
+      <obj_property name="ObjectShortName">rx_data_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/tx_send" type="logic">
+      <obj_property name="ElementShortName">tx_send</obj_property>
+      <obj_property name="ObjectShortName">tx_send</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/tx_in" type="array">
+      <obj_property name="ElementShortName">tx_in[7:0]</obj_property>
+      <obj_property name="ObjectShortName">tx_in[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/tx_busy" type="logic">
+      <obj_property name="ElementShortName">tx_busy</obj_property>
+      <obj_property name="ObjectShortName">tx_busy</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/system_state" type="array">
+      <obj_property name="ElementShortName">system_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">system_state[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/next_state" type="array">
+      <obj_property name="ElementShortName">next_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">next_state[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/rx" type="logic">
+      <obj_property name="ElementShortName">rx</obj_property>
+      <obj_property name="ObjectShortName">rx</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/data_out" type="array">
+      <obj_property name="ElementShortName">data_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/data_ready" type="logic">
+      <obj_property name="ElementShortName">data_ready</obj_property>
+      <obj_property name="ObjectShortName">data_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/baud_counter" type="array">
+      <obj_property name="ElementShortName">baud_counter[15:0]</obj_property>
+      <obj_property name="ObjectShortName">baud_counter[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/bit_counter" type="array">
+      <obj_property name="ElementShortName">bit_counter[3:0]</obj_property>
+      <obj_property name="ObjectShortName">bit_counter[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/shift_reg" type="array">
+      <obj_property name="ElementShortName">shift_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">shift_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/rx_prev" type="logic">
+      <obj_property name="ElementShortName">rx_prev</obj_property>
+      <obj_property name="ObjectShortName">rx_prev</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/receiving" type="logic">
+      <obj_property name="ElementShortName">receiving</obj_property>
+      <obj_property name="ObjectShortName">receiving</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/CLOCK_FREQ" type="array">
+      <obj_property name="ElementShortName">CLOCK_FREQ[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CLOCK_FREQ[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/BAUD_RATE" type="array">
+      <obj_property name="ElementShortName">BAUD_RATE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">BAUD_RATE[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/BAUD_TICK" type="array">
+      <obj_property name="ElementShortName">BAUD_TICK[31:0]</obj_property>
+      <obj_property name="ObjectShortName">BAUD_TICK[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/rx" type="logic">
+      <obj_property name="ElementShortName">rx</obj_property>
+      <obj_property name="ObjectShortName">rx</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/data_out" type="array">
+      <obj_property name="ElementShortName">data_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/data_ready" type="logic">
+      <obj_property name="ElementShortName">data_ready</obj_property>
+      <obj_property name="ObjectShortName">data_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/baud_counter" type="array">
+      <obj_property name="ElementShortName">baud_counter[15:0]</obj_property>
+      <obj_property name="ObjectShortName">baud_counter[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/bit_counter" type="array">
+      <obj_property name="ElementShortName">bit_counter[3:0]</obj_property>
+      <obj_property name="ObjectShortName">bit_counter[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/shift_reg" type="array">
+      <obj_property name="ElementShortName">shift_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">shift_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/rx_prev" type="logic">
+      <obj_property name="ElementShortName">rx_prev</obj_property>
+      <obj_property name="ObjectShortName">rx_prev</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/receiving" type="logic">
+      <obj_property name="ElementShortName">receiving</obj_property>
+      <obj_property name="ObjectShortName">receiving</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/CLOCK_FREQ" type="array">
+      <obj_property name="ElementShortName">CLOCK_FREQ[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CLOCK_FREQ[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/BAUD_RATE" type="array">
+      <obj_property name="ElementShortName">BAUD_RATE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">BAUD_RATE[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_receiver/BAUD_TICK" type="array">
+      <obj_property name="ElementShortName">BAUD_TICK[31:0]</obj_property>
+      <obj_property name="ObjectShortName">BAUD_TICK[31:0]</obj_property>
+   </wvobject>
+</wave_config>
