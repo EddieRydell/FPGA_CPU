@@ -6,7 +6,7 @@ module operating_system(
     input logic btnu,
     input logic rx,
     output logic tx,
-    output logic LED_1
+    output logic[15:0] led
     );
     
     logic [5:0] instruction_byte_counter;
@@ -22,7 +22,8 @@ module operating_system(
         .instruction_write_address(instruction_write_address),
         .instruction_write_data(instruction_write_data),
         .instruction_write_enable(instruction_write_enable),
-        .run(cpu_run)
+        .run(cpu_run),
+        .led(led)
     );
     
     logic [7:0] rx_out;
@@ -64,7 +65,7 @@ module operating_system(
     always_ff @(posedge clk) begin
     if (reset) begin
         system_state <= RESET;
-        LED_1 <= 1;
+        led <= '1;
         tx_send <= 0;
         tx_in <= 0;
         cpu_run <= 0;
@@ -73,7 +74,7 @@ module operating_system(
         case (system_state)
             RESET: begin
                 system_state <= INIT_HANDSHAKE_WAITING;
-                LED_1 <= 0;
+                led <= '0;
             end
             
             INIT_HANDSHAKE_WAITING: begin

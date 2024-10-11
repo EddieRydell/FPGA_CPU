@@ -3,10 +3,13 @@
 module CPU (
     input logic clk,
     input logic reset,
-    input logic [31:0] instruction_write_address,       // Input for write address from OS
-    input logic [47:0] instruction_write_data,          // Input for write data from OS
+    input logic[31:0] instruction_write_address,       // Input for write address from OS
+    input logic[47:0] instruction_write_data,          // Input for write data from OS
     input logic instruction_write_enable,                // Input for write enable from OS
-    input logic run
+    input logic run,
+    output logic syscall_enable,
+    output logic syscall_function_code,
+    output logic[31:0] syscall_data
     );
     
     // Registers and Program Counter
@@ -151,7 +154,11 @@ module CPU (
             `OP_POP:;
             `OP_LOAD:;
             `OP_STORE:;
-            `OP_SYSCALL:;
+            `OP_SYSCALL: begin
+                syscall_enable <= 1;
+                syscall_data <= register[0];
+                syscall_function_code <= writeback_function_code;
+            end
         endcase
         end
     
