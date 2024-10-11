@@ -43,22 +43,29 @@ instruction::instruction(const std::string& text) {
         op_code = op_codes.at("mov");
         auto arg1_converted = string_to_arg(tokens[1]);
         auto arg2_converted = string_to_arg(tokens[2]);
-        arg1 = arg1_converted.second;
-        arg2 = arg2_converted.second;
         char arg1_prefix = arg1_converted.first;
         char arg2_prefix = arg2_converted.first;
 
         if (arg1_prefix == PREFIX_IMMEDIATE && arg2_prefix == PREFIX_REGISTER) {
             fun_code = mov_operations.at("mov_ir");
+            memcpy(immediate, &arg1_converted.second, 4);
         }
         else if (arg1_prefix == PREFIX_REGISTER && arg2_prefix == PREFIX_REGISTER) {
             fun_code = mov_operations.at("mov_rr");
+            arg1 = arg1_converted.second;
+            arg2 = arg2_converted.second;
         }
         else if (arg1_prefix == PREFIX_REGISTER && arg2_prefix == PREFIX_MEMORY) {
+            // todo this doesn't work currently.
+            //  fix the arguments to use an immediate instead of an 8 bit register index to know what address in memory to access
             fun_code = mov_operations.at("mov_rm");
+            arg1 = arg1_converted.second;
+            arg2 = arg2_converted.second;
         }
         else if (arg1_prefix == PREFIX_MEMORY && arg2_prefix == PREFIX_REGISTER) {
             fun_code = mov_operations.at("mov_mr");
+            arg1 = arg1_converted.second;
+            arg2 = arg2_converted.second;
         }
         else {
             throw std::runtime_error("Invalid arguments to mov instruction");
@@ -66,7 +73,10 @@ instruction::instruction(const std::string& text) {
     }
     else if (op_codes.find(tokens[0]) != op_codes.end()){
         op_code = op_codes.at(tokens[0]);
-        fun_code = 0;
+        if (tokens[0] == "syscall") {
+            fun_code = syscalls.at(tokens[1]);
+        }
+        else fun_code = 0;
         if (op_code == op_codes.at("push")) {
             arg1 = string_to_arg(tokens[1]).second;
         }

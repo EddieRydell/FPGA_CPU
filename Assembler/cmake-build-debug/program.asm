@@ -1,6 +1,14 @@
-mov $5 %r0
-mov $4 %r1
+mov $65535 %r0
+mov $65535 %r1
 nop
 nop
 nop
-add %r0 %r1
+add %r1 %r0
+nop
+nop
+nop
+syscall led_write
+nop
+nop
+nop
+hlt

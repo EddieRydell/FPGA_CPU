@@ -11,7 +11,8 @@ public:
     uart_transmitter() = default;
     ~uart_transmitter();
     void initialize();
-    static void send_bytes(HANDLE hSerial, const std::vector<uint8_t>& data) ;
+    static void send_bytes(HANDLE hSerial, const std::vector<uint8_t>& data);
+    const HANDLE& get_handle() {return serial_handle;}
 
 private:
     bool probe_com_port(const std::string& com_port) ;

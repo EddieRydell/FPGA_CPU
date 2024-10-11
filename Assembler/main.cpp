@@ -25,11 +25,13 @@ int main(int argc, char** argv) {
     while (std::getline(file, curr_line)) {
         my_program.add_instruction(curr_line, line_number++);
     }
-    //my_program.print_machine_code();
+    my_program.generate_machine_code();
+    my_program.print_machine_code();
 
     uart_transmitter tx;
     tx.initialize();
-
+    uart_transmitter::send_bytes(tx.get_handle() , my_program.get_machine_code());
+    uart_transmitter::send_bytes(tx.get_handle(), {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF});
     return 0;
 }
 

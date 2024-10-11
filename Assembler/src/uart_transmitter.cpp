@@ -15,7 +15,6 @@ void uart_transmitter::initialize() {
     std::vector<std::string> com_ports = list_com_ports();
     for (const auto& i : com_ports) {
         if (probe_com_port(i)) {
-            std::cout << "Found FPGA on port " << i << std::endl;
             break;
         }
     }
@@ -72,7 +71,7 @@ void uart_transmitter::setup_serial(const char* com_port) {
 
 void uart_transmitter::send_bytes(HANDLE hSerial, const std::vector<uint8_t>& data) {
     DWORD bytes_written;
-    std::cout << "Sending bytes..." << std::endl;
+    std::cout << "Sending " << data.size() << " bytes..." << std::endl;
 
     for (size_t i = 0; i < data.size(); i += UART_CHUNK_SIZE) {
         BOOL success = WriteFile(hSerial, data.data() + i, UART_CHUNK_SIZE, &bytes_written, nullptr);
@@ -151,7 +150,7 @@ bool uart_transmitter::probe_com_port(const std::string& com_port) {
             printf("ReadFile failed with error code: %ld\n", error);
         }
         if (success && bytes_read > 0) {
-            std::cout << "Received response from FPGA: " << std::hex << response << std::endl;
+            std::cout << "Received response from FPGA: " << response << std::endl;
             if (response == 'A') {
                 std::cout << "FPGA detected on " << com_port << std::endl;
                 return true;

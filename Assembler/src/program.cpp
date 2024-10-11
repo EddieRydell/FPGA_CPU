@@ -19,9 +19,10 @@ void program::add_instruction(const std::string& instruction_string, int line_nu
     this->instructions.push_back(i);
 }
 
-std::vector<uint8_t> program::generate_machine_code() {
-    std::cout << "instructions size: " << this->instructions.size() << std::endl;
-    std::vector<uint8_t> machine_code(6);
+void program::generate_machine_code() {
+    std::cout << "Generating machine code..." << std::endl;
+    std::cout << "Instructions size: " << this->instructions.size() << std::endl;
+    machine_code.reserve(6);
     for (const auto& i : instructions) {
         machine_code.push_back((i.op_code << 4) | i.fun_code);
         machine_code.push_back((i.arg1 << 4) | i.arg2);
@@ -29,13 +30,12 @@ std::vector<uint8_t> program::generate_machine_code() {
             machine_code.emplace_back(byte);
         }
     }
-    return machine_code;
+    std::cout << "Done generating machine code" << std::endl;
 }
 
 void program::print_machine_code() {
-    const std::vector<uint8_t> bytes = generate_machine_code();
-    for (int i = 0; i < bytes.size(); i++) {
-        std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)bytes.at(i) << " ";
+    for (int i = 0; i < machine_code.size(); i++) {
+        std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)machine_code.at(i) << " " << std::dec;
 
         // Break line after every 6 bytes
         if (i % 6 == 5) {

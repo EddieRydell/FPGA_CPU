@@ -20,7 +20,7 @@
 // Function codes for binary operators
 #define FUN_ADD     0x0
 #define FUN_SUB     0x1
-#define FUN_MUL    0x2
+#define FUN_MUL     0x2
 #define FUN_DIV     0x3
 #define FUN_AND     0x4
 #define FUN_OR      0x5
@@ -49,6 +49,10 @@
 #define FUN_JO      0x7
 #define FUN_JS      0x8
 #define FUN_JNS     0x9
+
+// Function codes for syscalls
+#define FUN_LED_WRITE   0x0
+#define FUN_HALT    0x1
 
 // Mapping mnemonics to op_codes and function codes
 const std::unordered_map<std::string, int> op_codes = {
@@ -83,14 +87,14 @@ const std::unordered_map<std::string, int> unary_operations = {
         {"not", FUN_NOT}
 };
 
-std::unordered_map<std::string, int> mov_operations = {
+const std::unordered_map<std::string, int> mov_operations = {
         {"mov_ir", FUN_IR},  // Immediate to Register
         {"mov_rr", FUN_RR},  // Register to Register
         {"mov_rm", FUN_RM},  // Register to Memory
         {"mov_mr", FUN_MR}   // Memory to Register
 };
 
-std::unordered_map<std::string, int> jump_operations = {
+const std::unordered_map<std::string, int> jump_operations = {
         {"jmp", FUN_JU},     // Unconditional jump
         {"je", FUN_JE},      // Jump if equal
         {"jne", FUN_JNE},    // Jump if not equal
@@ -101,4 +105,9 @@ std::unordered_map<std::string, int> jump_operations = {
         {"jo", FUN_JO},      // Jump if overflow
         {"js", FUN_JS},      // Jump if sign
         {"jns", FUN_JNS}     // Jump if no sign
+};
+
+const std::unordered_map<std::string, int> syscalls = {
+        {"led_write", FUN_LED_WRITE},
+        {"halt", FUN_HALT}
 };

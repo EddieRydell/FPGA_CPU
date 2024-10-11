@@ -3,13 +3,13 @@
 module CPU (
     input logic clk,
     input logic reset,
-    input logic[31:0] instruction_write_address,       // Input for write address from OS
-    input logic[47:0] instruction_write_data,          // Input for write data from OS
+    input logic [31:0] instruction_write_address,       // Input for write address from OS
+    input logic [47:0] instruction_write_data,          // Input for write data from OS
     input logic instruction_write_enable,                // Input for write enable from OS
     input logic run,
     output logic syscall_enable,
-    output logic syscall_function_code,
-    output logic[31:0] syscall_data
+    output logic [3:0] syscall_function_code,
+    output logic [31:0] syscall_data
     );
     
     // Registers and Program Counter
@@ -24,6 +24,7 @@ module CPU (
         .write_address(instruction_write_address),        // Write address from OS
         .write_data(instruction_write_data),              // Write data from OS
         .write_enable(instruction_write_enable),          // Write enable from OS
+        .clk(clk),
         .instruction(fetch_instruction)       // Fetched instruction to CPU
     );
     
@@ -89,6 +90,8 @@ module CPU (
         end 
         else if (!run);
         else begin
+        syscall_enable <= 0;
+        
         // FETCH
         decode_instruction <= fetch_instruction;
         
@@ -116,6 +119,7 @@ module CPU (
         writeback_immediate <= memory_immediate;
         writeback_result <= memory_result;
         writeback_accessed <= memory_accessed;
+        
         // WRITEBACK
         case(writeback_op_code)
             `OP_NOP:;

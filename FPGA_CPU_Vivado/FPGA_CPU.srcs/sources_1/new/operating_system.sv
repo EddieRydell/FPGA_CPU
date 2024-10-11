@@ -16,6 +16,9 @@ module operating_system(
     logic [47:0] instruction_write_data;
     logic instruction_write_enable;
     logic cpu_run;
+    logic syscall_enable;
+    logic [3:0] syscall_function_code;
+    logic [31:0] syscall_data;
     CPU CPU1 (
         .clk(clk),
         .reset(reset),
@@ -23,7 +26,9 @@ module operating_system(
         .instruction_write_data(instruction_write_data),
         .instruction_write_enable(instruction_write_enable),
         .run(cpu_run),
-        .led(led)
+        .syscall_enable(syscall_enable),
+        .syscall_function_code(syscall_function_code),
+        .syscall_data(syscall_data)
     );
     
     logic [7:0] rx_out;
@@ -48,7 +53,7 @@ module operating_system(
         .busy(tx_busy)
     );
     
-    typedef enum logic[2:0] {
+    typedef enum logic[3:0] {
         RESET = 0,
         INIT_HANDSHAKE_RECEIVING,
         INIT_HANDSHAKE_WAITING,
@@ -100,6 +105,7 @@ module operating_system(
             end
             
             INIT_RECEIVING_PROGRAM: begin
+                led <= instruction_buffer[15:0];
                 if (rx_data_ready) begin
                     instruction_buffer <= {instruction_buffer[39:0], rx_out};  // Shift in byte
                     instruction_byte_counter <= instruction_byte_counter + 1;
@@ -115,12 +121,28 @@ module operating_system(
                     end
                 end
             end
-            PROGRAM_WAITING:
-                if (btnu) system_state <= PROGRAM_RUNNING;
-            PROGRAM_RUNNING:
+            PROGRAM_WAITING: begin
+                led <= '1;
+                if (btnu) begin
+                    // led <= '0;
+                    system_state <= PROGRAM_RUNNING;
+                end
+            end
+            PROGRAM_RUNNING: begin
                 cpu_run <= 1;
-            PROGRAM_HALTED:; 
-            
+                if (syscall_enable) begin
+                    case (syscall_function_code)
+                        `FUN_LED_WRITE:
+                            led <= syscall_data[15:0];
+                        `FUN_HALT: begin
+                            cpu_run <= 0;
+                            system_state <= PROGRAM_HALTED;
+                        end
+                    endcase
+                end
+            end
+            PROGRAM_HALTED:
+                led <= 32'hAAAAAAAA;
         endcase
     end
     end
