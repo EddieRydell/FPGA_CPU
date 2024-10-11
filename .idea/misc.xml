@@ -1,0 +1,918 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SVCompilerDirectivesDefines">
+    <option name="define">
+      <map>
+        <entry key="FLAG_CARRY">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1844" />
+                    <option name="replacementList" value="4'b0010" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FLAG_OVERFLOW">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1908" />
+                    <option name="replacementList" value="4'b1000" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FLAG_SIGN">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1876" />
+                    <option name="replacementList" value="4'b0100" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FLAG_ZERO">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1812" />
+                    <option name="replacementList" value="4'b0001" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_ADD">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="519" />
+                    <option name="replacementList" value="4'h0" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_ADDF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="888" />
+                    <option name="replacementList" value="4'h0" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_AND">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="619" />
+                    <option name="replacementList" value="4'h4" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_CMP">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="694" />
+                    <option name="replacementList" value="4'h7" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_CMPF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="988" />
+                    <option name="replacementList" value="4'h4" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_COSF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1142" />
+                    <option name="replacementList" value="4'h3" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_DEC">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="783" />
+                    <option name="replacementList" value="4'h1" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_DIV">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="594" />
+                    <option name="replacementList" value="4'h3" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_DIVF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="963" />
+                    <option name="replacementList" value="4'h3" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_EXPF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1192" />
+                    <option name="replacementList" value="4'h5" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_FTOI">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1067" />
+                    <option name="replacementList" value="4'h0" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_HALT">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1768" />
+                    <option name="replacementList" value="4'h1" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+              <option name="dependencies">
+                <set>
+                  <option value="operating_system.sv" />
+                </set>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_INC">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="758" />
+                    <option name="replacementList" value="4'h0" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_IR">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1307" />
+                    <option name="replacementList" value="4'h0" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_ITOF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1092" />
+                    <option name="replacementList" value="4'h1" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_JC">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1572" />
+                    <option name="replacementList" value="4'h5" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_JE">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1472" />
+                    <option name="replacementList" value="4'h1" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_JG">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1522" />
+                    <option name="replacementList" value="4'h3" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_JL">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1547" />
+                    <option name="replacementList" value="4'h4" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_JNC">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1597" />
+                    <option name="replacementList" value="4'h6" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_JNE">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1497" />
+                    <option name="replacementList" value="4'h2" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_JNS">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1672" />
+                    <option name="replacementList" value="4'h9" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_JO">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1622" />
+                    <option name="replacementList" value="4'h7" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_JS">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1647" />
+                    <option name="replacementList" value="4'h8" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_JU">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1447" />
+                    <option name="replacementList" value="4'h0" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_LED_WRITE">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1739" />
+                    <option name="replacementList" value="4'h0" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+              <option name="dependencies">
+                <set>
+                  <option value="operating_system.sv" />
+                </set>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_LOG2F">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1217" />
+                    <option name="replacementList" value="4'h6" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_MR">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1382" />
+                    <option name="replacementList" value="4'h3" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_MULT">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="569" />
+                    <option name="replacementList" value="4'h2" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_MULTF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="938" />
+                    <option name="replacementList" value="4'h2" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_NOT">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="808" />
+                    <option name="replacementList" value="4'h2" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_OR">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="644" />
+                    <option name="replacementList" value="4'h5" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_RM">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1357" />
+                    <option name="replacementList" value="4'h2" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_RR">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1332" />
+                    <option name="replacementList" value="4'h1" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_SINF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1117" />
+                    <option name="replacementList" value="4'h2" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_SQRTF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1242" />
+                    <option name="replacementList" value="4'h7" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_SUB">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="544" />
+                    <option name="replacementList" value="4'h1" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_SUBF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="913" />
+                    <option name="replacementList" value="4'h1" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_TANF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1167" />
+                    <option name="replacementList" value="4'h4" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="FUN_XOR">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="669" />
+                    <option name="replacementList" value="4'h6" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="GLBL">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="141" />
+                    <option name="source" value="glbl.v" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_BINARY">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="154" />
+                    <option name="replacementList" value="4'h2" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_BINARYF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="429" />
+                    <option name="replacementList" value="4'hd" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_CALL">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="254" />
+                    <option name="replacementList" value="4'h6" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_HLT">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="129" />
+                    <option name="replacementList" value="4'h1" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_JMP">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="229" />
+                    <option name="replacementList" value="4'h5" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_LOAD">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="354" />
+                    <option name="replacementList" value="4'ha" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_MOV">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="204" />
+                    <option name="replacementList" value="4'h4" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_NOP">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="104" />
+                    <option name="replacementList" value="4'h0" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_POP">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="329" />
+                    <option name="replacementList" value="4'h9" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_PUSH">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="304" />
+                    <option name="replacementList" value="4'h8" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_RET">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="279" />
+                    <option name="replacementList" value="4'h7" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_STORE">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="379" />
+                    <option name="replacementList" value="4'hb" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_SYSCALL">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="404" />
+                    <option name="replacementList" value="4'hc" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_UNARY">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="179" />
+                    <option name="replacementList" value="4'h3" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="OP_UNARYF">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="454" />
+                    <option name="replacementList" value="4'he" />
+                    <option name="source" value="op_codes.vh" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
