@@ -9,12 +9,10 @@ module instruction_memory #(parameter MEMORY_DEPTH = 256) (
     
     logic [47:0] instruction_memory[0:MEMORY_DEPTH -1];
     
-    // Reading from instruction memory (for normal operation)
-    assign instruction = instruction_memory[program_counter];
-    
-    // Writing to instruction memory (when receiving program via UART)
     always_ff @(posedge clk) begin
         if (write_enable)
             instruction_memory[write_address] <= write_data;
+        else
+            instruction <= instruction_memory[program_counter];
     end
 endmodule

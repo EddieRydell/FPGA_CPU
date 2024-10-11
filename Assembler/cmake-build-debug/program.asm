@@ -11,4 +11,5 @@ syscall led_write
 nop
 nop
 nop
+nop
 hlt

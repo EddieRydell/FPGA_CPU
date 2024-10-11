@@ -14,6 +14,8 @@
 `define OP_LOAD     4'ha
 `define OP_STORE    4'hb
 `define OP_SYSCALL  4'hc
+`define OP_BINARYF  4'hd
+`define OP_UNARYF   4'he
 
 // function codes for binary operators
 `define FUN_ADD     4'h0
@@ -29,6 +31,23 @@
 `define FUN_INC     4'h0
 `define FUN_DEC     4'h1
 `define FUN_NOT     4'h2
+
+// function codes for floating point binary operators
+`define FUN_ADDF    4'h0
+`define FUN_SUBF    4'h1
+`define FUN_MULTF   4'h2
+`define FUN_DIVF    4'h3
+`define FUN_CMPF    4'h4
+
+// function codes for floating point unary operators
+`define FUN_FTOI    4'h0
+`define FUN_ITOF    4'h1
+`define FUN_SINF    4'h2
+`define FUN_COSF    4'h3
+`define FUN_TANF    4'h4
+`define FUN_EXPF    4'h5
+`define FUN_LOG2F   4'h6
+`define FUN_SQRTF   4'h7
 
 // function codes for mov instructions
 `define FUN_IR      4'h0

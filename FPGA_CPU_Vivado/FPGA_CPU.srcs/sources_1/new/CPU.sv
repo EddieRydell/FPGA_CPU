@@ -3,13 +3,43 @@
 module CPU (
     input logic clk,
     input logic reset,
-    input logic [31:0] instruction_write_address,       // Input for write address from OS
-    input logic [47:0] instruction_write_data,          // Input for write data from OS
-    input logic instruction_write_enable,                // Input for write enable from OS
-    input logic run,
-    output logic syscall_enable,
+    
+    // I/O wires for reading/writing data memory
+    input logic [31:0] memory_data_accessed,
+    output logic [31:0] memory_data_to_write,
+    output logic [31:0] memory_access_address,
+    output logic memory_read_enable,
+    output logic memory_write_enable,
+    
+    // I/O wires for reading instruction memory
+    input logic [47:0] instruction_data,
+    output logic [31:0] program_counter,
+    
+    // I/O wires for FPU
+    input logic [31:0] FPU_result,
+    input logic FPU_valid_in,               // set when FPU is ready to receive an instruction from CPU
+    input logic FPU_valid_out,              // set when FPU is done with an operation
+    input logic [3:0] FPU_flags,            // flags set by the FPU based on the result of the operation
+    output logic [31:0] FPU_op1,
+    output logic [31:0] FPU_op2,
+    output logic [3:0] FPU_op_code,
+    output logic [3:0] FPU_function_code,
+    output logic FPU_enable,                // set when CPU is sending operands to FPU
+    output logic FPU_ready,                 // set when CPU is ready to receive result from FPU
+    
+    // I/O wires for syscalls
+    input logic [31:0] syscall_result,
+    input logic syscall_valid_in,           // set when OS is ready to receive a syscall
+    input logic syscall_valid_out,          // set when OS is done executing a syscall
     output logic [3:0] syscall_function_code,
-    output logic [31:0] syscall_data
+    output logic [31:0] syscall_data,
+    output logic syscall_enable,            // set when CPU wants to execute a syscall
+    output logic syscall_ready,             // set when CPU is ready to receive syscall result
+    
+    // I/O wires for determining the status of the CPU
+    input logic [3:0] OS_status,             // send by the OS to set the CPU's state
+    input logic OS_status_write_enable,
+    output logic [3:0] current_status
     );
     
     // Registers and Program Counter
