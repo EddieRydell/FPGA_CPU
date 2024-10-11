@@ -48,3 +48,7 @@
 790	1037	7503275774448512	Assembler.exe	5d082f0e63df3011
 6	626	7503281226907943	CMakeFiles/Assembler.dir/src/instruction.cpp.obj	aeac1566ccc14ac6
 627	805	7503281228671341	Assembler.exe	5d082f0e63df3011
+16	478	7503810616796399	CMakeFiles/Assembler.dir/src/program.cpp.obj	59028b7c8ff1be00
+12	612	7503810618141648	CMakeFiles/Assembler.dir/src/instruction.cpp.obj	aeac1566ccc14ac6
+7	1380	7503810625812713	CMakeFiles/Assembler.dir/main.cpp.obj	fed3761779358ef5
+1380	1820	7503810630147184	Assembler.exe	5d082f0e63df3011

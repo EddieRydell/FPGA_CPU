@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
-| Date         : Tue Oct  8 22:18:55 2024
+| Date         : Thu Oct 10 23:38:14 2024
 | Host         : EddieRydell running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file operating_system_control_sets_placed.rpt
 | Design       : operating_system
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    13 |
-|    Minimum number of control sets                        |    13 |
+| Total control sets                                       |    35 |
+|    Minimum number of control sets                        |    35 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    44 |
+| Unused register locations in slices containing registers |    49 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    13 |
+| Total control sets |    35 |
 | >= 0 to < 4        |     2 |
-| >= 4 to < 6        |     7 |
-| >= 6 to < 8        |     0 |
-| >= 8 to < 10       |     2 |
+| >= 4 to < 6        |     5 |
+| >= 6 to < 8        |     1 |
+| >= 8 to < 10       |     3 |
 | >= 10 to < 12      |     1 |
 | >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
-| >= 16              |     1 |
+| >= 16              |    23 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -58,12 +58,12 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |               4 |            2 |
+| No           | No                    | No                     |              35 |           26 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |               5 |            3 |
-| Yes          | No                    | No                     |               8 |            2 |
+| No           | Yes                   | No                     |               6 |            4 |
+| Yes          | No                    | No                     |             812 |          431 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |              59 |           17 |
+| Yes          | Yes                   | No                     |              82 |           27 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -74,18 +74,40 @@ Table of Contents
 |  Clock Signal  |              Enable Signal              |               Set/Reset Signal               | Slice Load Count | Bel Load Count | Bels / Slice |
 +----------------+-----------------------------------------+----------------------------------------------+------------------+----------------+--------------+
 |  clk_IBUF_BUFG | serial_transmitter/tx1_out              | reset_IBUF                                   |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG | FSM_onehot_system_state_reg_n_0_[0]     | reset_IBUF                                   |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG |                                         |                                              |                2 |              4 |         2.00 |
-|  clk_IBUF_BUFG | serial_transmitter/bit_counter          | serial_transmitter/bit_counter[3]_i_1__0_n_0 |                2 |              4 |         2.00 |
-|  clk_IBUF_BUFG | serial_transmitter/shift_reg            | serial_transmitter/shift_reg[5]_i_1_n_0      |                1 |              4 |         4.00 |
-|  clk_IBUF_BUFG | serial_receiver/bit_counter[3]_i_1_n_0  | reset_IBUF                                   |                2 |              4 |         2.00 |
-|  clk_IBUF_BUFG |                                         | reset_IBUF                                   |                3 |              5 |         1.67 |
-|  clk_IBUF_BUFG | serial_transmitter/E[0]                 | reset_IBUF                                   |                1 |              5 |         5.00 |
-|  clk_IBUF_BUFG | serial_receiver/baud_counter[8]_i_1_n_0 | reset_IBUF                                   |                1 |              5 |         5.00 |
-|  clk_IBUF_BUFG | serial_receiver/shift_reg[7]_i_1_n_0    | reset_IBUF                                   |                1 |              8 |         8.00 |
+|  clk_IBUF_BUFG |                                         |                                              |                3 |              3 |         1.00 |
+|  clk_IBUF_BUFG | serial_receiver/bit_counter[3]_i_1_n_1  | reset_IBUF                                   |                2 |              4 |         2.00 |
+|  clk_IBUF_BUFG | serial_receiver/E[0]                    | reset_IBUF                                   |                2 |              4 |         2.00 |
+|  clk_IBUF_BUFG | serial_transmitter/bit_counter          | serial_transmitter/bit_counter[3]_i_1__0_n_1 |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG | serial_receiver/baud_counter[8]_i_1_n_1 | reset_IBUF                                   |                3 |              5 |         1.67 |
+|  clk_IBUF_BUFG | serial_transmitter/shift_reg            | serial_transmitter/shift_reg[5]_i_1_n_1      |                2 |              5 |         2.50 |
+|  clk_IBUF_BUFG |                                         | reset_IBUF                                   |                4 |              6 |         1.50 |
+|  clk_IBUF_BUFG | serial_receiver/shift_reg[7]_i_1_n_1    | reset_IBUF                                   |                2 |              8 |         4.00 |
 |  clk_IBUF_BUFG | serial_receiver/data_ready1_out         |                                              |                2 |              8 |         4.00 |
-|  clk_IBUF_BUFG | serial_receiver/receiving_reg_n_0       | serial_receiver/baud_counter[15]_i_1_n_0     |                3 |             11 |         3.67 |
+|  clk_IBUF_BUFG | cpu_run_reg_n_1                         | reset_IBUF                                   |                1 |              8 |         8.00 |
+|  clk_IBUF_BUFG | serial_receiver/receiving_reg_n_1       | serial_receiver/baud_counter[15]_i_1_n_1     |                4 |             11 |         2.75 |
+|  clk_IBUF_BUFG | CPU1/E[0]                               | reset_IBUF                                   |                5 |             16 |         3.20 |
 |  clk_IBUF_BUFG | serial_transmitter/tx_busy              | reset_IBUF                                   |                4 |             16 |         4.00 |
+|  clk_IBUF_BUFG | CPU1/syscall_function_code[3]_i_1_n_1   |                                              |                7 |             20 |         2.86 |
+|  clk_IBUF_BUFG | CPU1/register[6][31]_i_1_n_1            |                                              |               24 |             32 |         1.33 |
+|  clk_IBUF_BUFG | CPU1/register[9][31]_i_1_n_1            |                                              |               26 |             32 |         1.23 |
+|  clk_IBUF_BUFG | CPU1/register[4][31]_i_1_n_1            |                                              |               21 |             32 |         1.52 |
+|  clk_IBUF_BUFG | CPU1/register[12][31]_i_1_n_1           |                                              |               17 |             32 |         1.88 |
+|  clk_IBUF_BUFG | CPU1/register[11][31]_i_1_n_1           |                                              |               19 |             32 |         1.68 |
+|  clk_IBUF_BUFG | CPU1/register[10][31]_i_1_n_1           |                                              |               20 |             32 |         1.60 |
+|  clk_IBUF_BUFG | CPU1/register[0][31]_i_1_n_1            |                                              |               19 |             32 |         1.68 |
+|  clk_IBUF_BUFG | CPU1/register[13][31]_i_1_n_1           |                                              |               21 |             32 |         1.52 |
+|  clk_IBUF_BUFG | CPU1/register[14][31]_i_1_n_1           |                                              |               18 |             32 |         1.78 |
+|  clk_IBUF_BUFG | CPU1/register[15][31]_i_1_n_1           |                                              |               18 |             32 |         1.78 |
+|  clk_IBUF_BUFG | CPU1/register[1][31]_i_1_n_1            |                                              |               19 |             32 |         1.68 |
+|  clk_IBUF_BUFG | CPU1/register[3][31]_i_1_n_1            |                                              |               20 |             32 |         1.60 |
+|  clk_IBUF_BUFG | CPU1/register[2][31]_i_1_n_1            |                                              |               23 |             32 |         1.39 |
+|  clk_IBUF_BUFG | CPU1/register[7][31]_i_1_n_1            |                                              |               22 |             32 |         1.45 |
+|  clk_IBUF_BUFG | CPU1/register[8][31]_i_1_n_1            |                                              |               23 |             32 |         1.39 |
+|  clk_IBUF_BUFG | CPU1/register[5][31]_i_1_n_1            |                                              |               20 |             32 |         1.60 |
+|  n_0_1472_BUFG |                                         |                                              |               23 |             32 |         1.39 |
+|  clk_IBUF_BUFG | serial_receiver/data_ready_reg_1[0]     |                                              |               19 |             55 |         2.89 |
+|  clk_IBUF_BUFG | serial_receiver/data_ready_reg_0[0]     |                                              |               19 |             56 |         2.95 |
+|  clk_IBUF_BUFG | CPU1/instruction_memory/cpu_run_reg     |                                              |               54 |            161 |         2.98 |
 +----------------+-----------------------------------------+----------------------------------------------+------------------+----------------+--------------+
 
 

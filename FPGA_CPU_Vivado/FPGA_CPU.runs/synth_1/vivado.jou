@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Tue Oct  8 22:17:10 2024
-# Process ID: 28884
+# Start of session at: Thu Oct 10 23:36:33 2024
+# Process ID: 25732
 # Current directory: C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.runs/synth_1
 # Command line: vivado.exe -log operating_system.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source operating_system.tcl
 # Log file: C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.runs/synth_1/operating_system.vds
@@ -19,6 +19,6 @@
 # Host memory       :68375 MB
 # Swap memory       :10200 MB
 # Total Virtual     :78576 MB
-# Available Virtual :53551 MB
+# Available Virtual :53333 MB
 #-----------------------------------------------------------
 source operating_system.tcl -notrace

@@ -56,6 +56,8 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 8
+set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35ticpg236-1L
 
@@ -75,11 +77,11 @@ read_verilog -library xil_defaultlib -sv {
   C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv
   C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/data_memory.sv
   C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/instruction_decoder.sv
-  C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/program_memory.sv
   C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv
   C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/operating_system.sv
   C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/serial_receiver.sv
   C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/serial_transmitter.sv
+  C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/instruction_memory.sv
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being

@@ -24,11 +24,14 @@ void program::generate_machine_code() {
     std::cout << "Instructions size: " << this->instructions.size() << std::endl;
     machine_code.reserve(6);
     for (const auto& i : instructions) {
-        machine_code.push_back((i.op_code << 4) | i.fun_code);
-        machine_code.push_back((i.arg1 << 4) | i.arg2);
-        for (const auto& byte : i.immediate) {
-            machine_code.emplace_back(byte);
-        }
+        machine_code.emplace_back((i.op_code << 4) | i.fun_code);
+        machine_code.emplace_back((i.arg1 << 4) | i.arg2);
+
+        uint32_t immediate = i.immediate;
+        machine_code.emplace_back(static_cast<uint8_t>((immediate >> 24) & 0xFF)); // Most significant byte
+        machine_code.emplace_back(static_cast<uint8_t>((immediate >> 16) & 0xFF));
+        machine_code.emplace_back(static_cast<uint8_t>((immediate >> 8) & 0xFF));
+        machine_code.emplace_back(static_cast<uint8_t>(immediate & 0xFF)); // Least significant byte
     }
     std::cout << "Done generating machine code" << std::endl;
 }

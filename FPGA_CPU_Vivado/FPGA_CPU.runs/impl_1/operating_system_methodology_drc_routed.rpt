@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
-| Date         : Tue Oct  8 22:19:14 2024
+| Date         : Thu Oct 10 23:38:39 2024
 | Host         : EddieRydell running 64-bit major release  (build 9200)
 | Command      : report_methodology -file operating_system_methodology_drc_routed.rpt -pb operating_system_methodology_drc_routed.pb -rpx operating_system_methodology_drc_routed.rpx
 | Design       : operating_system
@@ -23,33 +23,296 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 4
-+-----------+----------+-------------------------------+------------+
-| Rule      | Severity | Description                   | Violations |
-+-----------+----------+-------------------------------+------------+
-| TIMING-18 | Warning  | Missing input or output delay | 4          |
-+-----------+----------+-------------------------------+------------+
+             Violations found: 56
++-----------+----------+--------------------------------+------------+
+| Rule      | Severity | Description                    | Violations |
++-----------+----------+--------------------------------+------------+
+| SYNTH-10  | Warning  | Wide multiplier                | 3          |
+| TIMING-18 | Warning  | Missing input or output delay  | 20         |
+| TIMING-20 | Warning  | Non-clocked latch              | 32         |
+| LATCH-1   | Advisory | Existing latches in the design | 1          |
++-----------+----------+--------------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
+SYNTH-10#1 Warning
+Wide multiplier  
+Detected multiplier at CPU1/ALU/result0 of size 16x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#2 Warning
+Wide multiplier  
+Detected multiplier at CPU1/ALU/result0__0 of size 18x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#3 Warning
+Wide multiplier  
+Detected multiplier at CPU1/ALU/result0__1 of size 18x16, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
 TIMING-18#1 Warning
 Missing input or output delay  
-An input delay is missing on reset relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on btnu relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#2 Warning
 Missing input or output delay  
-An input delay is missing on rx relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on reset relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#3 Warning
 Missing input or output delay  
-An output delay is missing on LED_1 relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on rx relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#4 Warning
 Missing input or output delay  
+An output delay is missing on led[0] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#5 Warning
+Missing input or output delay  
+An output delay is missing on led[10] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#6 Warning
+Missing input or output delay  
+An output delay is missing on led[11] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#7 Warning
+Missing input or output delay  
+An output delay is missing on led[12] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#8 Warning
+Missing input or output delay  
+An output delay is missing on led[13] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#9 Warning
+Missing input or output delay  
+An output delay is missing on led[14] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#10 Warning
+Missing input or output delay  
+An output delay is missing on led[15] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#11 Warning
+Missing input or output delay  
+An output delay is missing on led[1] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#12 Warning
+Missing input or output delay  
+An output delay is missing on led[2] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#13 Warning
+Missing input or output delay  
+An output delay is missing on led[3] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#14 Warning
+Missing input or output delay  
+An output delay is missing on led[4] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#15 Warning
+Missing input or output delay  
+An output delay is missing on led[5] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#16 Warning
+Missing input or output delay  
+An output delay is missing on led[6] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#17 Warning
+Missing input or output delay  
+An output delay is missing on led[7] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#18 Warning
+Missing input or output delay  
+An output delay is missing on led[8] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#19 Warning
+Missing input or output delay  
+An output delay is missing on led[9] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#20 Warning
+Missing input or output delay  
 An output delay is missing on tx relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-20#1 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[0] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[0]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#2 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[10] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[10]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#3 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[11] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[11]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#4 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[12] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[12]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#5 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[13] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[13]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#6 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[14] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[14]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#7 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[15] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[15]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#8 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[16] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[16]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#9 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[17] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[17]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#10 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[18] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[18]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#11 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[19] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[19]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#12 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[1] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[1]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#13 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[20] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[20]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#14 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[21] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[21]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#15 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[22] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[22]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#16 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[23] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[23]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#17 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[24] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[24]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#18 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[25] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[25]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#19 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[26] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[26]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#20 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[27] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[27]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#21 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[28] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[28]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#22 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[29] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[29]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#23 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[2] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[2]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#24 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[30] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[30]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#25 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[31] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[31]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#26 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[3] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[3]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#27 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[4] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[4]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#28 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[5] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[5]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#29 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[6] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[6]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#30 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[7] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[7]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#31 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[8] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[8]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#32 Warning
+Non-clocked latch  
+The latch CPU1/ALU/result_reg[9] cannot be properly analyzed as its control pin CPU1/ALU/result_reg[9]/G is not reached by a timing clock
+Related violations: <none>
+
+LATCH-1#1 Advisory
+Existing latches in the design  
+There are 32 latches found in the design. Inferred latches are often the result of HDL coding mistakes, such as incomplete if or case statements.
 Related violations: <none>
 
 

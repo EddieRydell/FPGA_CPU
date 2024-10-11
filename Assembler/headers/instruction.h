@@ -19,7 +19,7 @@ protected:
     uint8_t fun_code = 0;
     uint8_t arg1 = 0;
     uint8_t arg2 = 0;
-    uint8_t immediate[4] = {0};
+    uint32_t immediate = 0;
 
     friend class program;
 };

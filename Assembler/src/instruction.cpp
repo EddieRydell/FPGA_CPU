@@ -48,7 +48,7 @@ instruction::instruction(const std::string& text) {
 
         if (arg1_prefix == PREFIX_IMMEDIATE && arg2_prefix == PREFIX_REGISTER) {
             fun_code = mov_operations.at("mov_ir");
-            memcpy(immediate, &arg1_converted.second, 4);
+            immediate = arg1_converted.second;
         }
         else if (arg1_prefix == PREFIX_REGISTER && arg2_prefix == PREFIX_REGISTER) {
             fun_code = mov_operations.at("mov_rr");

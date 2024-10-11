@@ -3,6 +3,7 @@ module instruction_memory #(parameter MEMORY_DEPTH = 256) (
     input logic[31:0] write_address,
     input logic[47:0] write_data,
     input logic write_enable,
+    input logic clk,
     output logic[47:0] instruction
     );
     

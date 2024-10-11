@@ -48,6 +48,10 @@
 `define FUN_JS      4'h8
 `define FUN_JNS     4'h9
 
+// function codes for different syscalls
+`define FUN_LED_WRITE   4'h0
+`define FUN_HALT        4'h1
+
 // flag codes
 `define FLAG_ZERO       4'b0001
 `define FLAG_CARRY      4'b0010
