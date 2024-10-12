@@ -18,8 +18,3 @@ The system consists of the following major components:
    The FPU performs floating-point arithmetic operations using a multi-cycle state machine. The FPU can handle floating-point addition, subtraction, multiplication, and division. Additional operations such as **FTOI (float-to-integer)** and **ITOF (integer-to-float)** are supported.
 
 **Additional Floating Point Operations**: Trigonometric functions (e.g., sine, cosine), square root, exponentiation, logarithms.
-  
-## Schematic
-
-
-
