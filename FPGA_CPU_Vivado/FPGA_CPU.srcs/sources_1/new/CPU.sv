@@ -13,7 +13,7 @@ module CPU (
     
     // I/O wires for reading instruction memory
     input logic [47:0] instruction_data,
-    output logic [31:0] program_counter,
+    output logic [31:0] instruction_address,
     
     // I/O wires for FPU
     input logic [31:0] FPU_result,
@@ -37,36 +37,31 @@ module CPU (
     output logic syscall_ready,             // set when CPU is ready to receive syscall result
     
     // I/O wires for determining the status of the CPU
-    input logic [3:0] OS_status,             // send by the OS to set the CPU's state
+    input logic [3:0] OS_status_in,         // sent by the OS to set the CPU's state
     input logic OS_status_write_enable,
     output logic [3:0] current_status
     );
     
     // Registers and Program Counter
-    logic[31:0] program_counter;
-    logic[31:0] register[0:15];
-    logic[3:0] flags;
+    logic [31:0] stack_pointer;
+    logic [31:0] program_counter;
+    assign instruction_address = program_counter;
+    logic [31:0] register[0:15];
+    logic [3:0] flags;
     
     // FETCH
-    logic[47:0] fetch_instruction;
-    instruction_memory #(.MEMORY_DEPTH(256)) instruction_memory (
-        .program_counter(program_counter),    // Program counter for fetch
-        .write_address(instruction_write_address),        // Write address from OS
-        .write_data(instruction_write_data),              // Write data from OS
-        .write_enable(instruction_write_enable),          // Write enable from OS
-        .clk(clk),
-        .instruction(fetch_instruction)       // Fetched instruction to CPU
-    );
+    logic [47:0] current_instruction;
+    assign current_instruction = instruction_data;    
     
     // DECODE
-    logic[47:0] decode_instruction;
     logic[3:0] decode_op_code;
     logic[3:0] decode_function_code;
     logic[3:0] decode_reg1;
     logic[3:0] decode_reg2;
     logic[31:0] decode_immediate;
     instruction_decoder decoder (
-        .instruction(decode_instruction), 
+        .clk(clk),
+        .instruction(current_instruction), 
         .op_code(decode_op_code), 
         .function_code(decode_function_code),
         .reg1(decode_reg1),
@@ -97,13 +92,6 @@ module CPU (
     logic[31:0] memory_immediate;
     logic[31:0] memory_result;
     logic[31:0] memory_accessed;
-    data_memory #(
-        .MEMORY_DEPTH(1024)
-        ) 
-        data_memory (
-            .address(memory_immediate),
-            .data(memory_accessed)
-        );
         
     // WRITEBACK
     logic[3:0] writeback_op_code;
