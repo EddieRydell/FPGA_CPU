@@ -1,7 +1,6 @@
 `timescale 1ns / 1ps
 module instruction_decoder (
-    input logic clk,
-    inputlogic [47:0] instruction,
+    input logic [47:0] instruction,
     output logic [3:0] op_code,
     output logic [3:0] function_code,
     output logic [3:0] reg1,
@@ -9,12 +8,12 @@ module instruction_decoder (
     output logic [31:0] immediate
     );
 
-    always_ff @(posedge clk) begin
-        op_code <= instruction[47:44];
-        function_code <= instruction[43:40];
-        reg1 <= instruction[39:36];
-        reg2 <= instruction[35:32];
-        immediate <= instruction[31:0];
+    always_comb begin
+        op_code = instruction[47:44];
+        function_code = instruction[43:40];
+        reg1 = instruction[39:36];
+        reg2 = instruction[35:32];
+        immediate = instruction[31:0];
     end
     
     

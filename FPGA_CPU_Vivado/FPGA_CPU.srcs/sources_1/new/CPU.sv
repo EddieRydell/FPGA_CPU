@@ -29,12 +29,12 @@ module CPU (
     
     // I/O wires for syscalls
     input logic [31:0] syscall_result,
-    input logic syscall_valid_in,           // set when OS is ready to receive a syscall
+    input logic syscall_valid_in,           // set when OS has received a syscall
     input logic syscall_valid_out,          // set when OS is done executing a syscall
     output logic [3:0] syscall_function_code,
     output logic [31:0] syscall_data,
     output logic syscall_enable,            // set when CPU wants to execute a syscall
-    output logic syscall_ready,             // set when CPU is ready to receive syscall result
+    output logic syscall_ready,             // set when CPU has received syscall result
     
     // I/O wires for determining the status of the CPU
     input logic [3:0] OS_status_in,         // sent by the OS to set the CPU's state
@@ -42,25 +42,38 @@ module CPU (
     output logic [3:0] current_status
     );
     
-    // Registers and Program Counter
+    // Registers, Stack, and Program Counter
+    logic [31:0] stack[1023:0];
     logic [31:0] stack_pointer;
     logic [31:0] program_counter;
     assign instruction_address = program_counter;
     logic [31:0] register[0:15];
     logic [3:0] flags;
     
-    // FETCH
-    logic [47:0] current_instruction;
-    assign current_instruction = instruction_data;    
+    logic [47:0] fetched_instruction;
     
-    // DECODE
     logic[3:0] decode_op_code;
     logic[3:0] decode_function_code;
     logic[3:0] decode_reg1;
     logic[3:0] decode_reg2;
     logic[31:0] decode_immediate;
+    
+    logic [3:0] execute_op_code;
+    logic [3:0] execute_function_code;
+    logic [3:0] execute_reg1;
+    logic [3:0] execute_reg2;
+    logic [31:0] execute_immediate;
+    logic [31:0] execute_result;
+    
+    logic [3:0] memory_op_code;
+    logic [3:0] memory_function_code;
+    logic [3:0] memory_reg1;
+    logic [3:0] memory_reg2;
+    logic [31:0] memory_immediate;
+    logic [31:0] memory_result;
+    logic [31:0] memory_read;
+    
     instruction_decoder decoder (
-        .clk(clk),
         .instruction(current_instruction), 
         .op_code(decode_op_code), 
         .function_code(decode_function_code),
@@ -69,13 +82,6 @@ module CPU (
         .immediate(decode_immediate)
         );
     
-    // EXECUTE
-    logic[3:0] execute_op_code;
-    logic[3:0] execute_function_code;
-    logic[3:0] execute_reg1;
-    logic[3:0] execute_reg2;
-    logic[31:0] execute_immediate;
-    logic[31:0] execute_result;
     ALU ALU(
         .op_code(execute_op_code),
         .function_code(execute_function_code),
@@ -84,106 +90,181 @@ module CPU (
         .result(execute_result)
         );
     
-    // MEMORY ACCESS
-    logic[3:0] memory_op_code;
-    logic[3:0] memory_function_code;
-    logic[3:0] memory_reg1;
-    logic[3:0] memory_reg2;
-    logic[31:0] memory_immediate;
-    logic[31:0] memory_result;
-    logic[31:0] memory_accessed;
-        
-    // WRITEBACK
-    logic[3:0] writeback_op_code;
-    logic[3:0] writeback_function_code;
-    logic[31:0] writeback_reg1;
-    logic[31:0] writeback_reg2;
-    logic[31:0] writeback_immediate;
-    logic[31:0] writeback_result;
-    logic[31:0] writeback_accessed;
+    
+    enum logic [2:0] {
+        SYSCALL_IDLE,
+        SYSCALL_ENTRY,
+        SYSCALL_WAITING,
+        SYSCALL_EXECUTING,
+        SYSCALL_EXIT
+    } syscall_handling_state;
+
+    enum logic [2:0] {
+        FPU_IDLE,
+        FPU_ENTRY,
+        FPU_WAITING,
+        FPU_EXECUTING,
+        FPU_EXIT
+    } FPU_handling_state;
+    
         
     always_ff @(posedge clk) begin
+        if (OS_status_write_enable)
+            current_status <= OS_status_in;
         if (reset) begin
             program_counter <= 0;
+            current_status <= CPU_IDLE;
+            syscall_handling_state <= SYSCALL_IDLE;
+            FPU_handling_state <= FPU_IDLE;
         end 
-        else if (!run);
-        else begin
-        syscall_enable <= 0;
-        
-        // FETCH
-        decode_instruction <= fetch_instruction;
-        
-        // DECODE
-        execute_op_code <= decode_op_code;
-        execute_function_code <= decode_function_code;
-        execute_reg1 <= decode_reg1;
-        execute_reg2 <= decode_reg2;
-        execute_immediate <= decode_immediate;
-        program_counter <= program_counter + 1;
-        
-        // EXECUTE
-        memory_op_code <= execute_op_code;
-        memory_function_code <= execute_function_code;
-        memory_reg1 <= execute_reg1;
-        memory_reg2 <= execute_reg2;
-        memory_immediate <= execute_immediate;
-        memory_result <= execute_result;
-        
-        // MEMORY ACCESS
-        writeback_op_code <= memory_op_code;
-        writeback_function_code <= memory_function_code;
-        writeback_reg1 <= memory_reg1;
-        writeback_reg2 <= memory_reg2;
-        writeback_immediate <= memory_immediate;
-        writeback_result <= memory_result;
-        writeback_accessed <= memory_accessed;
-        
-        // WRITEBACK
-        case(writeback_op_code)
-            `OP_NOP:;
-            `OP_HLT:;
-            `OP_BINARY:
-                register[writeback_reg2] <= writeback_result;
-            `OP_UNARY:
-                register[writeback_reg1] <= writeback_result;
-            `OP_MOV:
-                case(writeback_function_code)
-                    `FUN_IR: register[writeback_reg1] <= writeback_immediate;
-                    `FUN_RR: register[writeback_reg2] <= register[writeback_reg1];
-                    `FUN_RM:; // TODO
-                    `FUN_MR: register[writeback_reg1] <= memory_accessed;
-                endcase
-            `OP_JMP:
-                case (writeback_function_code)
-                    `FUN_JU:
-                        program_counter <= memory_immediate;
-                    `FUN_JE:
-                        if (flags & `FLAG_ZERO)
-                            program_counter <= memory_immediate;
-                    `FUN_JNE:
-                        if (!(flags & `FLAG_ZERO))
-                            program_counter <= memory_immediate;
-                    `FUN_JG:
-                        if (!(flags & `FLAG_ZERO) && !(flags & `FLAG_SIGN))
-                            program_counter <= memory_immediate;
-                    `FUN_JL:
-                        if ((flags & `FLAG_SIGN) != (flags & `FLAG_OVERFLOW))
-                            program_counter <= memory_immediate;
-                endcase
-            `OP_CALL:;
-            `OP_RET:;
-            `OP_PUSH:;
-            `OP_POP:;
-            `OP_LOAD:;
-            `OP_STORE:;
-            `OP_SYSCALL: begin
-                syscall_enable <= 1;
-                syscall_data <= register[0];
-                syscall_function_code <= writeback_function_code;
-            end
-        endcase
+        else if (current_status == CPU_RUNNING) begin
+            fetched_instruction <= instruction_data;
+            program_counter <= program_counter + 1;
+            
+            execute_op_code <= decode_op_code;
+            execute_function_code <= decode_function_code;
+            execute_reg1 <= decode_reg1;
+            execute_reg2 <= decode_reg2;
+            execute_immediate <= decode_immediate;
+            
+            if (execute_op_code == `OP_MOV && execute_function_code == `FUN_MR)
+                memory_read_enable <= 1;
+            
+            memory_op_code <= execute_op_code;
+            memory_function_code <= execute_function_code;
+            memory_reg1 <= execute_reg1;
+            memory_reg2 <= execute_reg2;
+            memory_immediate <= execute_immediate;
+            memory_result <= execute_result;
+            memory_read <= memory_data_accessed;
         end
-    
+        else if (current_status == CPU_RUNNING || current_status == CPU_WAITING) begin
+            case(memory_op_code)
+                `OP_NOP:;
+                `OP_HLT:
+                    current_status <= CPU_HALTED;
+                `OP_BINARY:
+                    register[memory_reg2] <= memory_result;
+                `OP_UNARY:
+                    register[memory_reg1] <= memory_result;
+                `OP_MOV:
+                    case(memory_function_code)
+                        `FUN_IR: register[memory_reg1] <= memory_immediate;
+                        `FUN_RR: register[memory_reg2] <= register[memory_reg1];
+                        `FUN_RM: memory_data_to_write = register[memory_reg1];
+                        `FUN_MR: register[memory_reg1] <= memory_read;
+                    endcase
+                `OP_JMP:
+                    case (memory_function_code)
+                        `FUN_JU:
+                            program_counter <= memory_immediate;
+                        `FUN_JE:
+                            if (flags & `FLAG_ZERO)
+                                program_counter <= memory_immediate;
+                        `FUN_JNE:
+                            if (!(flags & `FLAG_ZERO))
+                                program_counter <= memory_immediate;
+                        `FUN_JG:
+                            if (!(flags & `FLAG_ZERO) && !(flags & `FLAG_SIGN))
+                                program_counter <= memory_immediate;
+                        `FUN_JL:
+                            if ((flags & `FLAG_SIGN) != (flags & `FLAG_OVERFLOW))
+                                program_counter <= memory_immediate;
+                    endcase
+                `OP_CALL: begin
+                    stack[stack_pointer - 1] <= program_counter;
+                    stack_pointer <= stack_pointer - 1;
+                    program_counter <= memory_immediate;
+                end
+                `OP_RET: begin
+                    program_counter <= stack[stack_pointer];
+                    stack_pointer <= stack_pointer + 1;
+                end
+                `OP_PUSH: begin
+                    stack[stack_pointer - 1] <= register[memory_reg1];
+                    stack_pointer <= stack_pointer - 1;
+                end
+                `OP_POP: begin
+                    register[memory_reg1] <= stack[stack_pointer];
+                    stack_pointer <= stack_pointer + 1;
+                end
+                `OP_SYSCALL: begin
+                    case(syscall_handling_state)
+                        SYSCALL_IDLE: begin
+                            syscall_ready <= 0;
+                            syscall_enable <= 0;
+                            syscall_handling_state <= SYSCALL_ENTRY;
+                        end
+                        
+                        SYSCALL_ENTRY: begin
+                            syscall_enable <= 1;
+                            syscall_data <= memory_immediate;
+                            current_status <= CPU_WAITING;
+                            syscall_handling_state <= SYSCALL_WAITING;
+                        end
+                        
+                        SYSCALL_WAITING:
+                            if (syscall_valid_in) begin
+                                syscall_handling_state <= SYSCALL_EXECUTING;
+                                syscall_enable <= 0;
+                            end
+                                
+                        SYSCALL_EXECUTING:
+                            if (syscall_valid_out)
+                                syscall_handling_state <= SYSCALL_EXIT;
+                                
+                        SYSCALL_EXIT: begin
+                            syscall_handling_state <= SYSCALL_IDLE;
+                            current_status <= CPU_RUNNING;
+                            syscall_ready <= 1;
+                            register[0] <= syscall_result;
+                        end
+                        
+                        default:
+                            syscall_handling_state <= SYSCALL_IDLE;
+                    endcase
+                end
+                `OP_BINARYF, `OP_UNARYF: begin
+                    case(FPU_handling_state)
+                        FPU_IDLE: begin
+                            FPU_ready <= 0;
+                            FPU_enable <= 0;
+                            FPU_handling_state <= FPU_ENTRY;
+                        end
+                        
+                        FPU_ENTRY: begin
+                            FPU_enable <= 1;
+                            FPU_op1 <= register[memory_reg1];
+                            FPU_op2 <= register[memory_reg2];
+                            FPU_op_code <= memory_op_code;
+                            FPU_function_code <= memory_function_code;
+                            current_status <= CPU_WAITING;
+                            FPU_handling_state <= FPU_WAITING;
+                        end
+                        
+                        FPU_WAITING:
+                            if (FPU_valid_in) begin
+                                FPU_handling_state <= FPU_EXECUTING;
+                                FPU_enable <= 0;
+                            end
+                                
+                        FPU_EXECUTING:
+                            if (FPU_valid_out)
+                                FPU_handling_state <= FPU_EXIT;
+                                
+                        FPU_EXIT: begin
+                            FPU_handling_state <= FPU_IDLE;
+                            current_status <= CPU_RUNNING;
+                            FPU_ready <= 1;
+                            register[memory_reg1] <= FPU_result;
+                        end
+                        
+                        default:
+                            FPU_handling_state <= FPU_IDLE;
+                    endcase
+                end
+            endcase
+        end
     end
-
+    
 endmodule

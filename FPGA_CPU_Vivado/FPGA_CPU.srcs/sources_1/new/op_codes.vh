@@ -11,11 +11,9 @@
 `define OP_RET      4'h7
 `define OP_PUSH     4'h8
 `define OP_POP      4'h9
-`define OP_LOAD     4'ha
-`define OP_STORE    4'hb
-`define OP_SYSCALL  4'hc
-`define OP_BINARYF  4'hd
-`define OP_UNARYF   4'he
+`define OP_SYSCALL  4'ha
+`define OP_BINARYF  4'hb
+`define OP_UNARYF   4'hc
 
 // function codes for binary operators
 `define FUN_ADD     4'h0
