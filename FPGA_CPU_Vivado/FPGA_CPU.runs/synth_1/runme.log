@@ -4,16 +4,16 @@
 
 
 
-****** Vivado v2024.1 (64-bit)
-  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
-  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
-  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-  **** Start of session at: Thu Oct 10 23:36:33 2024
+****** Vivado v2024.1.2 (64-bit)
+  **** SW Build 5164865 on Thu Sep  5 14:37:11 MDT 2024
+  **** IP Build 5164407 on Fri Sep  6 08:18:11 MDT 2024
+  **** SharedData Build 5164864 on Thu Sep 05 13:09:09 MDT 2024
+  **** Start of session at: Tue Oct 15 13:00:00 2024
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source operating_system.tcl -notrace
-create_project: Time (s): cpu = 00:00:02 ; elapsed = 00:00:08 . Memory (MB): peak = 656.457 ; gain = 200.285
+create_project: Time (s): cpu = 00:00:02 ; elapsed = 00:00:09 . Memory (MB): peak = 663.902 ; gain = 192.316
 Command: read_checkpoint -auto_incremental -incremental C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/utils_1/imports/synth_1/operating_system.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/utils_1/imports/synth_1/operating_system.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -27,153 +27,263 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 28556
+INFO: [Synth 8-7075] Helper process launched with PID 14404
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:05 . Memory (MB): peak = 1509.227 ; gain = 448.883
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:08 . Memory (MB): peak = 1518.457 ; gain = 449.402
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'operating_system' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/operating_system.sv:3]
-INFO: [Synth 8-6157] synthesizing module 'CPU' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:3]
-INFO: [Synth 8-6157] synthesizing module 'instruction_memory' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/instruction_memory.sv:1]
-	Parameter MEMORY_DEPTH bound to: 256 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'instruction_memory' (0#1) [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/instruction_memory.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'instruction_decoder' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/instruction_decoder.sv:2]
-INFO: [Synth 8-6155] done synthesizing module 'instruction_decoder' (0#1) [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/instruction_decoder.sv:2]
-INFO: [Synth 8-6157] synthesizing module 'ALU' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv:5]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv:16]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv:27]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv:14]
-INFO: [Synth 8-6155] done synthesizing module 'ALU' (0#1) [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv:5]
 INFO: [Synth 8-6157] synthesizing module 'data_memory' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/data_memory.sv:3]
 	Parameter MEMORY_DEPTH bound to: 1024 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'data_memory' (0#1) [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/data_memory.sv:3]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:132]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:139]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:124]
+INFO: [Synth 8-6157] synthesizing module 'instruction_memory' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/instruction_memory.sv:1]
+	Parameter MEMORY_DEPTH bound to: 256 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'instruction_memory' (0#1) [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/instruction_memory.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'FPU' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/FPU.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'FPU' (0#1) [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/FPU.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'CPU' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'instruction_decoder' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/instruction_decoder.sv:2]
+INFO: [Synth 8-6155] done synthesizing module 'instruction_decoder' (0#1) [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/instruction_decoder.sv:2]
+INFO: [Synth 8-6157] synthesizing module 'ALU' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv:5]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv:19]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv:30]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv:17]
+INFO: [Synth 8-6155] done synthesizing module 'ALU' (0#1) [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv:5]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:151]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:153]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:156]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:157]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:159]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:155]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:162]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:192]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:226]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:265]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:265]
+WARNING: [Synth 8-6090] variable 'register' is written by both blocking and non-blocking assignments, entire logic could be removed [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:265]
+INFO: [Common 17-14] Message 'Synth 8-6090' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:146]
 INFO: [Synth 8-6155] done synthesizing module 'CPU' (0#1) [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:3]
 INFO: [Synth 8-6157] synthesizing module 'serial_receiver' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/serial_receiver.sv:3]
 INFO: [Synth 8-6155] done synthesizing module 'serial_receiver' (0#1) [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/serial_receiver.sv:3]
 INFO: [Synth 8-6157] synthesizing module 'serial_transmitter' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/serial_transmitter.sv:3]
 INFO: [Synth 8-6155] done synthesizing module 'serial_transmitter' (0#1) [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/serial_transmitter.sv:3]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/operating_system.sv:134]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/operating_system.sv:79]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/operating_system.sv:197]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/operating_system.sv:173]
 INFO: [Synth 8-6155] done synthesizing module 'operating_system' (0#1) [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/operating_system.sv:3]
-WARNING: [Synth 8-87] always_comb on 'result_reg' did not result in combinational logic [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv:17]
-WARNING: [Synth 8-6014] Unused sequential element writeback_accessed_reg was removed.  [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:121]
-WARNING: [Synth 8-3848] Net flags in module/entity CPU does not have driver. [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:18]
-WARNING: [Synth 8-7129] Port data[31] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[30] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[29] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[28] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[27] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[26] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[25] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[24] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[23] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[22] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[21] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[20] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[19] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[18] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[17] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[16] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[15] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[14] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[13] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[12] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[11] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[10] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[9] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[8] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[7] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[6] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[5] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[4] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[3] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[2] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[1] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port data[0] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[31] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[30] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[29] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[28] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[27] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[26] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[25] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[24] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[23] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[22] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[21] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[20] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[19] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[18] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[17] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[16] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[15] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[14] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[13] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[12] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[11] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[10] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[9] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[8] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[7] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[6] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[5] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[4] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[3] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[2] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[1] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[0] in module data_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[31] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[30] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[29] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[28] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[27] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[26] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[25] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[24] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[23] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[22] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[21] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[20] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[19] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[18] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[17] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[16] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[15] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[14] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[13] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[12] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[11] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[10] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[9] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port program_counter[8] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port write_address[31] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port write_address[30] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port write_address[29] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port write_address[28] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port write_address[27] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port write_address[26] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port write_address[25] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port write_address[24] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port write_address[23] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port write_address[22] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port write_address[21] in module instruction_memory is either unconnected or has no load
-WARNING: [Synth 8-7129] Port write_address[20] in module instruction_memory is either unconnected or has no load
+WARNING: [Synth 8-6014] Unused sequential element state_reg was removed.  [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/FPU.sv:50]
+WARNING: [Synth 8-6014] Unused sequential element result_reg_reg was removed.  [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/FPU.sv:52]
+WARNING: [Synth 8-3848] Net result in module/entity FPU does not have driver. [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/FPU.sv:4]
+WARNING: [Synth 8-3848] Net valid_in in module/entity FPU does not have driver. [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/FPU.sv:5]
+WARNING: [Synth 8-3848] Net flags in module/entity FPU does not have driver. [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/FPU.sv:7]
+WARNING: [Synth 8-3848] Net memory_access_address in module/entity CPU does not have driver. [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:10]
+WARNING: [Synth 8-3848] Net memory_write_enable in module/entity CPU does not have driver. [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/CPU.sv:12]
+WARNING: [Synth 8-3848] Net instruction_write_address in module/entity operating_system does not have driver. [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/operating_system.sv:33]
+WARNING: [Synth 8-3848] Net instruction_to_write in module/entity operating_system does not have driver. [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/operating_system.sv:32]
+WARNING: [Synth 8-3848] Net instruction_write_enable in module/entity operating_system does not have driver. [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/operating_system.sv:31]
+WARNING: [Synth 8-7129] Port memory_access_address[31] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[30] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[29] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[28] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[27] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[26] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[25] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[24] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[23] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[22] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[21] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[20] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[19] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[18] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[17] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[16] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[15] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[14] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[13] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[12] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[11] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[10] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[9] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[8] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[7] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[6] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[5] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[4] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[3] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[2] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[1] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_access_address[0] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memory_write_enable in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FPU_flags[3] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FPU_flags[2] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FPU_flags[1] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port FPU_flags[0] in module CPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[31] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[30] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[29] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[28] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[27] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[26] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[25] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[24] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[23] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[22] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[21] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[20] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[19] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[18] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[17] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[16] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[15] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[14] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[13] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[12] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[11] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[10] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[9] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[8] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[7] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[6] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[5] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[4] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[3] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[2] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[1] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port result[0] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port valid_in in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flags[3] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flags[2] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flags[1] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flags[0] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[31] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[30] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[29] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[28] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[27] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[26] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[25] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[24] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[23] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[22] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[21] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[20] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[19] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[18] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[17] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[16] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[15] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[14] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[13] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[12] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[11] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[10] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[9] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[8] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[7] in module FPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port op1[6] in module FPU is either unconnected or has no load
 INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:07 . Memory (MB): peak = 1630.430 ; gain = 570.086
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:12 . Memory (MB): peak = 1672.895 ; gain = 603.840
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:02 ; elapsed = 00:00:07 . Memory (MB): peak = 1630.430 ; gain = 570.086
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:13 . Memory (MB): peak = 1672.895 ; gain = 603.840
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:07 . Memory (MB): peak = 1630.430 ; gain = 570.086
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:13 . Memory (MB): peak = 1672.895 ; gain = 603.840
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.033 . Memory (MB): peak = 1630.430 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.210 . Memory (MB): peak = 1672.895 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -184,86 +294,108 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/operating_system_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1712.965 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1776.219 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 1712.965 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.061 . Memory (MB): peak = 1776.219 ; gain = 0.000
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:04 ; elapsed = 00:00:15 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:24 . Memory (MB): peak = 1776.219 ; gain = 707.164
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35ticpg236-1L
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:04 ; elapsed = 00:00:15 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:24 . Memory (MB): peak = 1776.219 ; gain = 707.164
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:04 ; elapsed = 00:00:15 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:08 ; elapsed = 00:00:24 . Memory (MB): peak = 1776.219 ; gain = 707.164
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'system_state_reg' in module 'operating_system'
-WARNING: [Synth 8-327] inferring latch for variable 'result_reg' [C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/ALU.sv:17]
+INFO: [Synth 8-802] inferred FSM for state register 'UART_state_reg' in module 'operating_system'
+WARNING: [Synth 8-6430] The Block RAM "CPU:/stack_reg" may get memory collision error if read and write address collide. Use attribute (* rw_addr_collision= "yes" *) to avoid collision 
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
-                   RESET |                             0000 |                             0000
-  INIT_HANDSHAKE_WAITING |                             0001 |                             0010
-INIT_HANDSHAKE_RECEIVING |                             0010 |                             0001
-INIT_HANDSHAKE_START_TRANSMITTING |                             0011 |                             0011
-INIT_HANDSHAKE_TRANSMITTING |                             0100 |                             0100
-  INIT_RECEIVING_PROGRAM |                             0101 |                             0101
-         PROGRAM_WAITING |                             0110 |                             0110
-         PROGRAM_RUNNING |                             0111 |                             0111
-          PROGRAM_HALTED |                             1000 |                             1000
+                    INIT |                             0001 |                              000
+     HANDSHAKE_RECEIVING |                             0010 |                              001
+  HANDSHAKE_TRANSMITTING |                             0100 |                              010
+         RECEIVING_BYTES |                             1000 |                              011
 ---------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'system_state_reg' using encoding 'sequential' in module 'operating_system'
+INFO: [Synth 8-3354] encoded FSM with state register 'UART_state_reg' using encoding 'one-hot' in module 'operating_system'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  BOOTUP |                          0000001 |                             0000
+                    IDLE |                          0000010 |                             0001
+       EXECUTING_PROGRAM |                          0000100 |                             0011
+        FINISHED_PROGRAM |                          0001000 |                             0100
+       BEGINNING_SYSCALL |                          0010000 |                             0101
+        HANDLING_SYSCALL |                          0100000 |                             0110
+   DONE_HANDLING_SYSCALL |                          1000000 |                             0111
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'system_state_reg' using encoding 'one-hot' in module 'operating_system'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:16 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:28 . Memory (MB): peak = 1776.219 ; gain = 707.164
 ---------------------------------------------------------------------------------
+RAM Pipeline Warning: Read Address Register Found For RAM stack_reg. We will not be able to pipeline it. This may degrade performance. 
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input   32 Bit       Adders := 3     
+	   2 Input   33 Bit       Adders := 1     
+	   2 Input   32 Bit       Adders := 5     
 	   3 Input   32 Bit       Adders := 1     
 	   2 Input   16 Bit       Adders := 2     
-	   2 Input    6 Bit       Adders := 1     
 	   2 Input    4 Bit       Adders := 2     
 +---XORs : 
 	   2 Input     32 Bit         XORs := 1     
 +---Registers : 
-	               48 Bit    Registers := 3     
-	               32 Bit    Registers := 25    
+	               48 Bit    Registers := 258   
+	               33 Bit    Registers := 1     
+	               32 Bit    Registers := 28    
 	               16 Bit    Registers := 3     
+	               10 Bit    Registers := 1     
 	                8 Bit    Registers := 4     
-	                6 Bit    Registers := 1     
-	                4 Bit    Registers := 13    
-	                1 Bit    Registers := 9     
+	                4 Bit    Registers := 14    
+	                3 Bit    Registers := 2     
+	                1 Bit    Registers := 15    
 +---Multipliers : 
 	              32x32  Multipliers := 1     
++---RAMs : 
+	              32K Bit	(1024 X 32 bit)          RAMs := 2     
 +---Muxes : 
-	   2 Input   32 Bit        Muxes := 8     
-	  14 Input   32 Bit        Muxes := 17    
-	   4 Input   32 Bit        Muxes := 1     
-	   2 Input   16 Bit        Muxes := 3     
+	   2 Input   32 Bit        Muxes := 172   
+	  13 Input   32 Bit        Muxes := 19    
+	   4 Input   32 Bit        Muxes := 16    
+	   6 Input   32 Bit        Muxes := 17    
+	   2 Input   16 Bit        Muxes := 2     
 	   3 Input   16 Bit        Muxes := 1     
-	   9 Input   16 Bit        Muxes := 1     
+	   7 Input   16 Bit        Muxes := 1     
 	   3 Input    9 Bit        Muxes := 1     
 	   2 Input    8 Bit        Muxes := 1     
-	   2 Input    4 Bit        Muxes := 3     
-	   9 Input    4 Bit        Muxes := 1     
-	   2 Input    1 Bit        Muxes := 21    
-	   8 Input    1 Bit        Muxes := 1     
-	  14 Input    1 Bit        Muxes := 1     
-	   9 Input    1 Bit        Muxes := 9     
-	   4 Input    1 Bit        Muxes := 1     
+	   7 Input    7 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 5     
+	  13 Input    4 Bit        Muxes := 1     
+	   6 Input    4 Bit        Muxes := 3     
+	   4 Input    4 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 2     
+	  13 Input    3 Bit        Muxes := 2     
+	   7 Input    3 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 4     
+	   2 Input    1 Bit        Muxes := 36    
+	  13 Input    1 Bit        Muxes := 13    
+	   6 Input    1 Bit        Muxes := 11    
+	   4 Input    1 Bit        Muxes := 6     
+	   7 Input    1 Bit        Muxes := 6     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -292,23 +424,28 @@ DSP Report: operator result0 is absorbed into DSP result0.
 DSP Report: Generating DSP result0, operation Mode is: (PCIN>>17)+A*B.
 DSP Report: operator result0 is absorbed into DSP result0.
 DSP Report: operator result0 is absorbed into DSP result0.
+RAM Pipeline Warning: Read Address Register Found For RAM stack_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM stack_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM stack_reg. We will not be able to pipeline it. This may degrade performance. 
+WARNING: [Synth 8-6430] The Block RAM "i_0/CPU/stack_reg" may get memory collision error if read and write address collide. Use attribute (* rw_addr_collision= "yes" *) to avoid collision 
+RAM Pipeline Warning: Read Address Register Found For RAM stack_reg. We will not be able to pipeline it. This may degrade performance. 
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:07 ; elapsed = 00:00:22 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:53 . Memory (MB): peak = 1802.734 ; gain = 733.680
 ---------------------------------------------------------------------------------
- Sort Area is  result0_0 : 0 0 : 3101 5879 : Used 1 time 0
- Sort Area is  result0_0 : 0 1 : 2778 5879 : Used 1 time 0
- Sort Area is  result0_3 : 0 0 : 2759 5418 : Used 1 time 0
- Sort Area is  result0_3 : 0 1 : 2659 5418 : Used 1 time 0
+ Sort Area is operating_system__GC0 result0_0 : 0 0 : 3101 5879 : Used 1 time 0
+ Sort Area is operating_system__GC0 result0_0 : 0 1 : 2778 5879 : Used 1 time 0
+ Sort Area is operating_system__GC0 result0_3 : 0 0 : 2759 5418 : Used 1 time 0
+ Sort Area is operating_system__GC0 result0_3 : 0 1 : 2659 5418 : Used 1 time 0
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 Block RAM: Preliminary Mapping Report (see note below)
-+------------+-------------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|Module Name | RTL Object                                | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
-+------------+-------------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|CPU1        | instruction_memory/instruction_memory_reg | 256 x 48(READ_FIRST)   | W |   | 256 x 48(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
-+------------+-------------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|i_0/CPU     | stack_reg  | 1 K x 32(READ_FIRST)   | W |   | 1 K x 32(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
 
 Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
 
@@ -330,24 +467,24 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:30 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:01:00 . Memory (MB): peak = 1802.734 ; gain = 733.680
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:31 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished Timing Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:01:01 . Memory (MB): peak = 1802.734 ; gain = 733.680
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 Block RAM: Final Mapping Report
-+------------+-------------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|Module Name | RTL Object                                | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
-+------------+-------------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|CPU1        | instruction_memory/instruction_memory_reg | 256 x 48(READ_FIRST)   | W |   | 256 x 48(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
-+------------+-------------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|i_0/CPU     | stack_reg  | 1 K x 32(READ_FIRST)   | W |   | 1 K x 32(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
 
 ---------------------------------------------------------------------------------
 Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -355,8 +492,9 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance CPU/stack_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:11 ; elapsed = 00:00:32 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:01:01 . Memory (MB): peak = 1802.734 ; gain = 733.680
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -374,51 +512,41 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:12 ; elapsed = 00:00:36 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished IO Insertion : Time (s): cpu = 00:00:23 ; elapsed = 00:01:06 . Memory (MB): peak = 1802.734 ; gain = 733.680
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:12 ; elapsed = 00:00:36 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:23 ; elapsed = 00:01:06 . Memory (MB): peak = 1802.734 ; gain = 733.680
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:12 ; elapsed = 00:00:37 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:23 ; elapsed = 00:01:06 . Memory (MB): peak = 1802.734 ; gain = 733.680
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:12 ; elapsed = 00:00:37 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:23 ; elapsed = 00:01:06 . Memory (MB): peak = 1802.734 ; gain = 733.680
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:12 ; elapsed = 00:00:37 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:01:06 . Memory (MB): peak = 1802.734 ; gain = 733.680
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:12 ; elapsed = 00:00:37 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:23 ; elapsed = 00:01:06 . Memory (MB): peak = 1802.734 ; gain = 733.680
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
 ---------------------------------------------------------------------------------
-
-DSP Final Report (the ' indicates corresponding REG is set)
-+------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
-|Module Name | DSP Mapping  | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
-+------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
-|ALU         | A*B          | 17     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
-|ALU         | A*B          | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
-|ALU         | PCIN>>17+A*B | 17     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
-+------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
-
 
 Report BlackBoxes: 
 +-+--------------+----------+
@@ -430,47 +558,42 @@ Report Cell Usage:
 +------+---------+------+
 |      |Cell     |Count |
 +------+---------+------+
-|1     |BUFG     |     2|
-|2     |CARRY4   |   328|
-|3     |DSP48E1  |     3|
-|4     |LUT1     |    89|
-|5     |LUT2     |   178|
-|6     |LUT3     |  1013|
-|7     |LUT4     |    76|
-|8     |LUT5     |    58|
-|9     |LUT6     |   580|
-|10    |MUXF7    |   128|
-|11    |MUXF8    |    64|
-|12    |RAMB36E1 |     1|
-|13    |FDRE     |   885|
-|14    |FDSE     |    18|
-|15    |LD       |    32|
-|16    |IBUF     |     4|
-|17    |OBUF     |    17|
+|1     |BUFG     |     1|
+|2     |CARRY4   |    38|
+|3     |LUT1     |    11|
+|4     |LUT2     |    40|
+|5     |LUT3     |   103|
+|6     |LUT4     |    76|
+|7     |LUT5     |    78|
+|8     |LUT6     |   168|
+|9     |RAMB36E1 |     1|
+|10    |FDRE     |   200|
+|11    |FDSE     |    27|
+|12    |IBUF     |     4|
+|13    |OBUF     |    17|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:12 ; elapsed = 00:00:37 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:23 ; elapsed = 00:01:06 . Memory (MB): peak = 1802.734 ; gain = 733.680
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 26 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:09 ; elapsed = 00:00:35 . Memory (MB): peak = 1712.965 ; gain = 570.086
-Synthesis Optimization Complete : Time (s): cpu = 00:00:12 ; elapsed = 00:00:37 . Memory (MB): peak = 1712.965 ; gain = 652.621
+Synthesis finished with 0 errors, 0 critical warnings and 3 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:17 ; elapsed = 00:01:02 . Memory (MB): peak = 1802.734 ; gain = 630.355
+Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:01:06 . Memory (MB): peak = 1802.734 ; gain = 733.680
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.037 . Memory (MB): peak = 1712.965 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 556 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1802.734 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 39 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1712.965 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1802.734 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
-  A total of 32 instances were transformed.
-  LD => LDCE: 32 instances
+No Unisim elements were transformed.
 
-Synth Design complete | Checksum: ba402755
+Synth Design complete | Checksum: 5a31cfc7
 INFO: [Common 17-83] Releasing license: Synthesis
-49 Infos, 105 Warnings, 0 Critical Warnings and 0 Errors encountered.
+55 Infos, 213 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:14 ; elapsed = 00:00:43 . Memory (MB): peak = 1712.965 ; gain = 1052.004
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 1712.965 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:25 ; elapsed = 00:01:12 . Memory (MB): peak = 1802.734 ; gain = 1128.461
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1802.734 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.runs/synth_1/operating_system.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file operating_system_utilization_synth.rpt -pb operating_system_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Oct 10 23:37:28 2024...
+INFO: [Common 17-206] Exiting Vivado at Tue Oct 15 13:01:26 2024...

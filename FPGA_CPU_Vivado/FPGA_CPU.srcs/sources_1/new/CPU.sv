@@ -31,7 +31,6 @@ module CPU (
     input logic [31:0] syscall_result,
     input logic syscall_valid_in,           // set when OS has received a syscall
     input logic syscall_valid_out,          // set when OS is done executing a syscall
-    output logic [3:0] syscall_function_code,
     output logic [31:0] syscall_data,
     output logic syscall_enable,            // set when CPU wants to execute a syscall
     output logic syscall_ready,             // set when CPU has received syscall result
@@ -39,16 +38,19 @@ module CPU (
     // I/O wires for determining the status of the CPU
     input logic [3:0] OS_status_in,         // sent by the OS to set the CPU's state
     input logic OS_status_write_enable,
-    output logic [3:0] current_status
+    output logic [3:0] current_status,
+    
+    // Registers as outputs so they can be accessed during syscalls
+    output logic [31:0] register[0:15]
     );
     
     // Registers, Stack, and Program Counter
-    logic [31:0] stack[1023:0];
+    logic [31:0] stack[0:1023];
     logic [31:0] stack_pointer;
     logic [31:0] program_counter;
     assign instruction_address = program_counter;
-    logic [31:0] register[0:15];
-    logic [3:0] flags;
+    
+    logic [3:0] ALU_flags;
     
     logic [47:0] fetched_instruction;
     
@@ -74,7 +76,7 @@ module CPU (
     logic [31:0] memory_read;
     
     instruction_decoder decoder (
-        .instruction(current_instruction), 
+        .instruction(fetched_instruction), 
         .op_code(decode_op_code), 
         .function_code(decode_function_code),
         .reg1(decode_reg1),
@@ -87,9 +89,9 @@ module CPU (
         .function_code(execute_function_code),
         .operand1(register[execute_reg1]),
         .operand2(register[execute_reg2]),
-        .result(execute_result)
+        .result(execute_result),
+        .flags(ALU_flags)
         );
-    
     
     enum logic [2:0] {
         SYSCALL_IDLE,
@@ -112,10 +114,12 @@ module CPU (
         if (OS_status_write_enable)
             current_status <= OS_status_in;
         if (reset) begin
+            register = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             program_counter <= 0;
             current_status <= CPU_IDLE;
             syscall_handling_state <= SYSCALL_IDLE;
             FPU_handling_state <= FPU_IDLE;
+            stack_pointer <= 1023;
         end 
         else if (current_status == CPU_RUNNING) begin
             fetched_instruction <= instruction_data;
@@ -138,7 +142,7 @@ module CPU (
             memory_result <= execute_result;
             memory_read <= memory_data_accessed;
         end
-        else if (current_status == CPU_RUNNING || current_status == CPU_WAITING) begin
+        if (current_status == CPU_RUNNING || current_status == CPU_WAITING) begin
             case(memory_op_code)
                 `OP_NOP:;
                 `OP_HLT:
@@ -159,16 +163,16 @@ module CPU (
                         `FUN_JU:
                             program_counter <= memory_immediate;
                         `FUN_JE:
-                            if (flags & `FLAG_ZERO)
+                            if (ALU_flags & `FLAG_ZERO)
                                 program_counter <= memory_immediate;
                         `FUN_JNE:
-                            if (!(flags & `FLAG_ZERO))
+                            if (!(ALU_flags & `FLAG_ZERO))
                                 program_counter <= memory_immediate;
                         `FUN_JG:
-                            if (!(flags & `FLAG_ZERO) && !(flags & `FLAG_SIGN))
+                            if (!(ALU_flags & `FLAG_ZERO) && !(ALU_flags & `FLAG_SIGN))
                                 program_counter <= memory_immediate;
                         `FUN_JL:
-                            if ((flags & `FLAG_SIGN) != (flags & `FLAG_OVERFLOW))
+                            if ((ALU_flags & `FLAG_SIGN) != (ALU_flags & `FLAG_OVERFLOW))
                                 program_counter <= memory_immediate;
                     endcase
                 `OP_CALL: begin
@@ -191,15 +195,16 @@ module CPU (
                 `OP_SYSCALL: begin
                     case(syscall_handling_state)
                         SYSCALL_IDLE: begin
+                            memory_op_code <= memory_op_code;
                             syscall_ready <= 0;
                             syscall_enable <= 0;
                             syscall_handling_state <= SYSCALL_ENTRY;
+                            current_status <= CPU_WAITING;
                         end
                         
                         SYSCALL_ENTRY: begin
                             syscall_enable <= 1;
                             syscall_data <= memory_immediate;
-                            current_status <= CPU_WAITING;
                             syscall_handling_state <= SYSCALL_WAITING;
                         end
                         
@@ -216,6 +221,7 @@ module CPU (
                         SYSCALL_EXIT: begin
                             syscall_handling_state <= SYSCALL_IDLE;
                             current_status <= CPU_RUNNING;
+                            memory_op_code <= `OP_NOP;
                             syscall_ready <= 1;
                             register[0] <= syscall_result;
                         end

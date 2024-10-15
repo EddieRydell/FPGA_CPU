@@ -1,4 +1,19 @@
-// Header file containing predefined constants for all op codes and function codes
+// Header file containing predefined constants for all op codes, states, and function codes for the CPU
+
+typedef enum logic [3:0] {
+    CPU_IDLE,
+    CPU_RUNNING,
+    CPU_HALTED,
+    CPU_SLEEPING,
+    CPU_WAITING,
+    CPU_RESET,
+    CPU_INTERRUPT_HANDLING,
+    CPU_FAULT_HANDLING,
+    CPU_DEBUG_BREAKPOINT,
+    CPU_BOOTING,
+    CPU_THROTTLED,
+    CPU_CONTEXT_SWITCHING
+} CPU_state_t;
 
 // op codes
 `define OP_NOP      4'h0
@@ -66,38 +81,11 @@
 `define FUN_JNS     4'h9
 
 // function codes for different syscalls
-`define FUN_LED_WRITE   4'h0
-`define FUN_HALT        4'h1
+`define SYSCALL_LED_WRITE   4'h0
+`define SYSCALL_HALT        4'h1
 
 // flag codes
 `define FLAG_ZERO       4'b0001
 `define FLAG_CARRY      4'b0010
 `define FLAG_SIGN       4'b0100
 `define FLAG_OVERFLOW   4'b1000
-
-typedef enum logic [3:0] {
-    RESET = 0,
-    INIT_HANDSHAKE_RECEIVING,
-    INIT_HANDSHAKE_WAITING,
-    INIT_HANDSHAKE_START_TRANSMITTING,
-    INIT_HANDSHAKE_TRANSMITTING,
-    INIT_RECEIVING_PROGRAM,
-    PROGRAM_WAITING,
-    PROGRAM_RUNNING,
-    PROGRAM_HALTED
-} OS_state_t;
-
-typedef enum logic [3:0] {
-    CPU_RUNNING = 0,
-    CPU_IDLE,
-    CPU_HALTED,
-    CPU_SLEEPING,
-    CPU_WAITING,
-    CPU_RESET,
-    CPU_INTERRUPT_HANDLING,
-    CPU_FAULT_HANDLING,
-    CPU_DEBUG_BREAKPOINT,
-    CPU_BOOTING,
-    CPU_THROTTLED,
-    CPU_CONTEXT_SWITCHING
-} CPU_state_t;

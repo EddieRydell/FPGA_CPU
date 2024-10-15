@@ -7,10 +7,13 @@ module ALU (
     input logic [3:0] function_code,
     input logic [31:0] operand1,
     input logic [31:0] operand2,
-    output logic [31:0] result
+    output logic [31:0] result,
+    output logic [3:0] flags
     );
     
     always_comb begin
+        result = 0; // default value
+        flags = 0;
         case(op_code)
             `OP_BINARY: begin
                 case(function_code)

@@ -11,6 +11,7 @@ module data_memory #(parameter MEMORY_DEPTH = 1024) (
     logic[31:0] data_memory[0:MEMORY_DEPTH - 1];
     
     always_ff @(posedge clk) begin
+        data_accessed <= 0;
         if (read_enable)
             data_accessed <= data_memory[access_address];
         if (write_enable)

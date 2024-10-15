@@ -4,6 +4,7 @@ module operating_system(
     input logic clk,
     input logic reset,
     input logic btnu,
+    input logic btnd,
     input logic rx,
     output logic tx,
     output logic[15:0] led
@@ -38,6 +39,7 @@ module operating_system(
         .write_data(instruction_to_write),
         .write_enable(instruction_write_enable),
         .clk(clk),
+        .reset(reset),
         .instruction(instruction_from_memory)
     );
     
@@ -67,12 +69,16 @@ module operating_system(
         .reset(reset)
     );
     
-    logic cpu_run;
+    logic [31:0] syscall_result;
     logic syscall_enable;
-    logic [3:0] syscall_function_code;
+    logic syscall_ready;
+    logic syscall_valid_in;
+    logic syscall_valid_out;
     logic [31:0] syscall_data;
+    logic [31:0] syscall_registers[0:15];
     
-    logic [3:0] CPU_status;
+    logic [3:0] CPU_status_to_set;
+    logic [3:0] CPU_current_status;
     logic CPU_status_write_enable;
     CPU CPU (
         .clk(clk),
@@ -85,7 +91,7 @@ module operating_system(
         .memory_write_enable(data_write_enable),
         
         .instruction_data(instruction_from_memory),
-        .program_counter(instruction_read_address),
+        .instruction_address(instruction_read_address),
         
         .FPU_result(FPU_result),
         .FPU_valid_in(FPU_valid_in),
@@ -98,17 +104,18 @@ module operating_system(
         .FPU_enable(FPU_enable),
         .FPU_ready(FPU_ready),
         
-        .syscall_result(),
-        .syscall_valid_in(),
-        .syscall_valid_out(),
-        .syscall_function_code(),
-        .syscall_data(),
-        .syscall_enable(),
-        .syscall_ready(),
+        .syscall_result(syscall_result),
+        .syscall_valid_in(syscall_valid_in),
+        .syscall_valid_out(syscall_valid_out),
+        .syscall_data(syscall_data),
+        .syscall_enable(syscall_enable),
+        .syscall_ready(syscall_ready),
         
-        .OS_status_in(CPU_status),
+        .OS_status_in(CPU_status_to_set),
         .OS_status_write_enable(CPU_status_write_enable),
-        .current_status()
+        .current_status(CPU_current_status),
+        
+        .register(syscall_registers)
     );
 
     
@@ -134,86 +141,131 @@ module operating_system(
         .busy(tx_busy)
     );
     
-    OS_state_t system_state;
+    enum logic [3:0] {
+        BOOTUP,
+        IDLE,
+        RECEIVING_PROGRAM,
+        EXECUTING_PROGRAM,
+        FINISHED_PROGRAM,
+        BEGINNING_SYSCALL,
+        HANDLING_SYSCALL,
+        DONE_HANDLING_SYSCALL
+    } system_state;
     
+    enum logic [2:0] {
+        INIT,
+        HANDSHAKE_RECEIVING,
+        HANDSHAKE_TRANSMITTING,
+        RECEIVING_BYTES
+    } UART_state;
+    
+    logic [32:0] counter;
     always_ff @(posedge clk) begin
-    if (reset) begin
-        system_state <= RESET;
-        led <= '1;
-        tx_send <= 0;
-        tx_in <= 0;
-        cpu_run <= 0;
-    end
-    else begin
-        case (system_state)
-            RESET: begin
-                system_state <= INIT_HANDSHAKE_WAITING;
-                led <= '0;
-            end
-            
-            INIT_HANDSHAKE_WAITING: begin
-                if (!rx) system_state <= INIT_HANDSHAKE_RECEIVING;
-            end
-            
-            INIT_HANDSHAKE_RECEIVING:
-                if (rx_data_ready)
-                    if (rx_out == 8'h50) // 'P'
-                        system_state <= INIT_HANDSHAKE_START_TRANSMITTING;
-                    else system_state <= INIT_HANDSHAKE_WAITING;
-                    
-            INIT_HANDSHAKE_START_TRANSMITTING: begin
-                tx_in <= 8'h41; // 'A'
-                tx_send <= 1;
-                system_state <= INIT_HANDSHAKE_TRANSMITTING;
-            end
-            
-            INIT_HANDSHAKE_TRANSMITTING: begin
-                tx_send <= 0;
-                if (!tx_busy)
-                    system_state <= INIT_RECEIVING_PROGRAM;
-            end
-            
-            INIT_RECEIVING_PROGRAM: begin
-                led <= instruction_buffer[15:0];
-                if (rx_data_ready) begin
-                    instruction_buffer <= {instruction_buffer[39:0], rx_out};  // Shift in byte
-                    instruction_byte_counter <= instruction_byte_counter + 1;
-                    if (instruction_byte_counter == 5) begin
-                        instruction_write_data <= instruction_buffer;  // Load buffer into write_data
-                        instruction_write_enable <= 1;                // Enable memory write
-                        instruction_write_address <= instruction_write_address + 1;  // Increment write address
-                        instruction_byte_counter <= 0;
-                    end 
-                    else begin
-                        if (instruction_buffer == '1) system_state <= PROGRAM_WAITING;
-                        instruction_write_enable <= 0;  // Disable memory write until instruction is complete
+        if (reset) begin
+            system_state <= BOOTUP;
+            led <= '1;
+            tx_send <= 0;
+            tx_in <= 0;
+            counter <= 0;
+            UART_state <= INIT;
+        end
+        else begin
+            case (system_state)
+                BOOTUP: begin
+                    system_state <= IDLE;
+                    led <= 0;
+                end
+                
+                IDLE: begin
+                    counter <= counter + 1;
+                    if (led == 0) led <= 1;
+                    if (counter == 10000000) begin
+                        led <= led << 1;
+                        counter <= 0;
+                    end
+                    if (!rx) begin
+                        // system_state <= RECEIVING_PROGRAM;
+                    end
+                    if (btnu) begin
+                        CPU_status_write_enable <= 1;
+                        CPU_status_to_set <= CPU_RUNNING;
+                        system_state <= EXECUTING_PROGRAM;
                     end
                 end
-            end
-            PROGRAM_WAITING: begin
-                led <= '1;
-                if (btnu) begin
-                    // led <= '0;
-                    system_state <= PROGRAM_RUNNING;
-                end
-            end
-            PROGRAM_RUNNING: begin
-                cpu_run <= 1;
-                if (syscall_enable) begin
-                    case (syscall_function_code)
-                        `FUN_LED_WRITE:
-                            led <= syscall_data[15:0];
-                        `FUN_HALT: begin
-                            cpu_run <= 0;
-                            system_state <= PROGRAM_HALTED;
+                
+                RECEIVING_PROGRAM: begin
+                    case (UART_state)
+                        INIT: begin
+                            UART_state <= HANDSHAKE_RECEIVING;
+                        end
+                        
+                        HANDSHAKE_RECEIVING: begin
+                            if (rx_data_ready) begin
+                                if (rx_out == 8'h50) begin // 'P'
+                                    tx_in <= 8'h41; // 'A'
+                                    tx_send <= 1;
+                                    UART_state <= HANDSHAKE_TRANSMITTING;
+                                end
+                                else begin
+                                    UART_state <= INIT;
+                                    system_state <= IDLE;
+                                end
+                            end
+                        end
+                        
+                        HANDSHAKE_TRANSMITTING: begin
+                            tx_send <= 0;
+                            if (!tx_busy)
+                                UART_state <= RECEIVING_BYTES;
+                        end
+                        
+                        RECEIVING_BYTES: begin
+                            
+                            
                         end
                     endcase
                 end
-            end
-            PROGRAM_HALTED:
-                led <= 32'hAAAAAAAA;
-        endcase
-    end
+                
+                EXECUTING_PROGRAM: begin
+                    CPU_status_write_enable <= 0;
+                    if (syscall_enable) begin
+                        system_state <= BEGINNING_SYSCALL;
+                    end
+                    if (CPU_current_status == CPU_HALTED) begin
+                        system_state <= FINISHED_PROGRAM;
+                    end
+                end
+                
+                FINISHED_PROGRAM: begin
+                    if (btnd) begin
+                        system_state <= IDLE;
+                    end
+                end
+                
+                BEGINNING_SYSCALL: begin
+                    syscall_valid_in <= 1;
+                    syscall_valid_out <= 0;
+                    system_state <= HANDLING_SYSCALL;
+                end
+                
+                HANDLING_SYSCALL: begin
+                    case (syscall_data)
+                        default: begin
+                            syscall_valid_out <= 1;
+                            syscall_result <= 0;
+                            led <= syscall_registers[0][15:0];
+                            system_state <= DONE_HANDLING_SYSCALL;
+                        end
+                    endcase
+                end
+                
+                DONE_HANDLING_SYSCALL: begin
+                    if (syscall_ready) begin
+                        system_state <= EXECUTING_PROGRAM;
+                    end
+                end
+            endcase
+        end
     end
     
 endmodule

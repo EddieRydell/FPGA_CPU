@@ -5,21 +5,22 @@
    <db_ref_list>
       <db_ref path="operating_system_behav.wdb" id="1">
          <top_modules>
+            <top_module name="\$unit_ALU_sv_3567339121 " />
             <top_module name="glbl" />
             <top_module name="operating_system" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="64.305120 us"></ZoomStartTime>
-      <ZoomEndTime time="130.107668 us"></ZoomEndTime>
-      <Cursor1Time time="209.000000 us"></Cursor1Time>
+      <ZoomStartTime time="1,636.083 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,748.784 ns"></ZoomEndTime>
+      <Cursor1Time time="1,730.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="240"></NameColumnWidth>
-      <ValueColumnWidth column_width="146"></ValueColumnWidth>
+      <NameColumnWidth column_width="171"></NameColumnWidth>
+      <ValueColumnWidth column_width="219"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="38" />
+   <WVObjectSize size="130" />
    <wvobject fp_name="/operating_system/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -27,6 +28,10 @@
    <wvobject fp_name="/operating_system/reset" type="logic">
       <obj_property name="ElementShortName">reset</obj_property>
       <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/btnu" type="logic">
+      <obj_property name="ElementShortName">btnu</obj_property>
+      <obj_property name="ObjectShortName">btnu</obj_property>
    </wvobject>
    <wvobject fp_name="/operating_system/rx" type="logic">
       <obj_property name="ElementShortName">rx</obj_property>
@@ -36,9 +41,133 @@
       <obj_property name="ElementShortName">tx</obj_property>
       <obj_property name="ObjectShortName">tx</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/LED_1" type="logic">
-      <obj_property name="ElementShortName">LED_1</obj_property>
-      <obj_property name="ObjectShortName">LED_1</obj_property>
+   <wvobject fp_name="/operating_system/led" type="array">
+      <obj_property name="ElementShortName">led[15:0]</obj_property>
+      <obj_property name="ObjectShortName">led[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/instruction_byte_counter" type="array">
+      <obj_property name="ElementShortName">instruction_byte_counter[5:0]</obj_property>
+      <obj_property name="ObjectShortName">instruction_byte_counter[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/data_write_enable" type="logic">
+      <obj_property name="ElementShortName">data_write_enable</obj_property>
+      <obj_property name="ObjectShortName">data_write_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/data_read_enable" type="logic">
+      <obj_property name="ElementShortName">data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/data_memory_to_write" type="array">
+      <obj_property name="ElementShortName">data_memory_to_write[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_memory_to_write[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/data_memory_accessed" type="array">
+      <obj_property name="ElementShortName">data_memory_accessed[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_memory_accessed[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/data_memory_address" type="array">
+      <obj_property name="ElementShortName">data_memory_address[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_memory_address[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/instruction_write_enable" type="logic">
+      <obj_property name="ElementShortName">instruction_write_enable</obj_property>
+      <obj_property name="ObjectShortName">instruction_write_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/instruction_to_write" type="array">
+      <obj_property name="ElementShortName">instruction_to_write[47:0]</obj_property>
+      <obj_property name="ObjectShortName">instruction_to_write[47:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/instruction_write_address" type="array">
+      <obj_property name="ElementShortName">instruction_write_address[31:0]</obj_property>
+      <obj_property name="ObjectShortName">instruction_write_address[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/instruction_from_memory" type="array">
+      <obj_property name="ElementShortName">instruction_from_memory[47:0]</obj_property>
+      <obj_property name="ObjectShortName">instruction_from_memory[47:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/instruction_read_address" type="array">
+      <obj_property name="ElementShortName">instruction_read_address[31:0]</obj_property>
+      <obj_property name="ObjectShortName">instruction_read_address[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/FPU_result" type="array">
+      <obj_property name="ElementShortName">FPU_result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_result[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/FPU_valid_in" type="logic">
+      <obj_property name="ElementShortName">FPU_valid_in</obj_property>
+      <obj_property name="ObjectShortName">FPU_valid_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/FPU_valid_out" type="logic">
+      <obj_property name="ElementShortName">FPU_valid_out</obj_property>
+      <obj_property name="ObjectShortName">FPU_valid_out</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/FPU_flags" type="array">
+      <obj_property name="ElementShortName">FPU_flags[3:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_flags[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/FPU_op1" type="array">
+      <obj_property name="ElementShortName">FPU_op1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_op1[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/FPU_op2" type="array">
+      <obj_property name="ElementShortName">FPU_op2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_op2[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/FPU_op_code" type="array">
+      <obj_property name="ElementShortName">FPU_op_code[3:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_op_code[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/FPU_function_code" type="array">
+      <obj_property name="ElementShortName">FPU_function_code[3:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_function_code[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/FPU_enable" type="logic">
+      <obj_property name="ElementShortName">FPU_enable</obj_property>
+      <obj_property name="ObjectShortName">FPU_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/FPU_ready" type="logic">
+      <obj_property name="ElementShortName">FPU_ready</obj_property>
+      <obj_property name="ObjectShortName">FPU_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/syscall_result" type="array">
+      <obj_property name="ElementShortName">syscall_result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">syscall_result[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/syscall_enable" type="logic">
+      <obj_property name="ElementShortName">syscall_enable</obj_property>
+      <obj_property name="ObjectShortName">syscall_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/syscall_ready" type="logic">
+      <obj_property name="ElementShortName">syscall_ready</obj_property>
+      <obj_property name="ObjectShortName">syscall_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/syscall_valid_in" type="logic">
+      <obj_property name="ElementShortName">syscall_valid_in</obj_property>
+      <obj_property name="ObjectShortName">syscall_valid_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/syscall_valid_out" type="logic">
+      <obj_property name="ElementShortName">syscall_valid_out</obj_property>
+      <obj_property name="ObjectShortName">syscall_valid_out</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/syscall_data" type="array">
+      <obj_property name="ElementShortName">syscall_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">syscall_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/syscall_registers" type="array">
+      <obj_property name="ElementShortName">syscall_registers[0:15][31:0]</obj_property>
+      <obj_property name="ObjectShortName">syscall_registers[0:15][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU_status_to_set" type="array">
+      <obj_property name="ElementShortName">CPU_status_to_set[3:0]</obj_property>
+      <obj_property name="ObjectShortName">CPU_status_to_set[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU_current_status" type="array">
+      <obj_property name="ElementShortName">CPU_current_status[3:0]</obj_property>
+      <obj_property name="ObjectShortName">CPU_current_status[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU_status_write_enable" type="logic">
+      <obj_property name="ElementShortName">CPU_status_write_enable</obj_property>
+      <obj_property name="ObjectShortName">CPU_status_write_enable</obj_property>
    </wvobject>
    <wvobject fp_name="/operating_system/rx_out" type="array">
       <obj_property name="ElementShortName">rx_out[7:0]</obj_property>
@@ -61,12 +190,256 @@
       <obj_property name="ObjectShortName">tx_busy</obj_property>
    </wvobject>
    <wvobject fp_name="/operating_system/system_state" type="array">
-      <obj_property name="ElementShortName">system_state[2:0]</obj_property>
-      <obj_property name="ObjectShortName">system_state[2:0]</obj_property>
+      <obj_property name="ElementShortName">system_state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">system_state[3:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/next_state" type="array">
-      <obj_property name="ElementShortName">next_state[2:0]</obj_property>
-      <obj_property name="ObjectShortName">next_state[2:0]</obj_property>
+   <wvobject fp_name="/operating_system/UART_state" type="array">
+      <obj_property name="ElementShortName">UART_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">UART_state[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/counter" type="array">
+      <obj_property name="ElementShortName">counter[16:0]</obj_property>
+      <obj_property name="ObjectShortName">counter[16:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/decoder/instruction" type="array">
+      <obj_property name="ElementShortName">instruction[47:0]</obj_property>
+      <obj_property name="ObjectShortName">instruction[47:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/decoder/op_code" type="array">
+      <obj_property name="ElementShortName">op_code[3:0]</obj_property>
+      <obj_property name="ObjectShortName">op_code[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/decoder/function_code" type="array">
+      <obj_property name="ElementShortName">function_code[3:0]</obj_property>
+      <obj_property name="ObjectShortName">function_code[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/decoder/reg1" type="array">
+      <obj_property name="ElementShortName">reg1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">reg1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/decoder/reg2" type="array">
+      <obj_property name="ElementShortName">reg2[3:0]</obj_property>
+      <obj_property name="ObjectShortName">reg2[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/decoder/immediate" type="array">
+      <obj_property name="ElementShortName">immediate[31:0]</obj_property>
+      <obj_property name="ObjectShortName">immediate[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/memory_data_accessed" type="array">
+      <obj_property name="ElementShortName">memory_data_accessed[31:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_data_accessed[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/memory_data_to_write" type="array">
+      <obj_property name="ElementShortName">memory_data_to_write[31:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_data_to_write[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/memory_access_address" type="array">
+      <obj_property name="ElementShortName">memory_access_address[31:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_access_address[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/memory_read_enable" type="logic">
+      <obj_property name="ElementShortName">memory_read_enable</obj_property>
+      <obj_property name="ObjectShortName">memory_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/memory_write_enable" type="logic">
+      <obj_property name="ElementShortName">memory_write_enable</obj_property>
+      <obj_property name="ObjectShortName">memory_write_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/instruction_data" type="array">
+      <obj_property name="ElementShortName">instruction_data[47:0]</obj_property>
+      <obj_property name="ObjectShortName">instruction_data[47:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/instruction_address" type="array">
+      <obj_property name="ElementShortName">instruction_address[31:0]</obj_property>
+      <obj_property name="ObjectShortName">instruction_address[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/FPU_result" type="array">
+      <obj_property name="ElementShortName">FPU_result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_result[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/FPU_valid_in" type="logic">
+      <obj_property name="ElementShortName">FPU_valid_in</obj_property>
+      <obj_property name="ObjectShortName">FPU_valid_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/FPU_valid_out" type="logic">
+      <obj_property name="ElementShortName">FPU_valid_out</obj_property>
+      <obj_property name="ObjectShortName">FPU_valid_out</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/FPU_flags" type="array">
+      <obj_property name="ElementShortName">FPU_flags[3:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_flags[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/FPU_op1" type="array">
+      <obj_property name="ElementShortName">FPU_op1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_op1[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/FPU_op2" type="array">
+      <obj_property name="ElementShortName">FPU_op2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_op2[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/FPU_op_code" type="array">
+      <obj_property name="ElementShortName">FPU_op_code[3:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_op_code[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/FPU_function_code" type="array">
+      <obj_property name="ElementShortName">FPU_function_code[3:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_function_code[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/FPU_enable" type="logic">
+      <obj_property name="ElementShortName">FPU_enable</obj_property>
+      <obj_property name="ObjectShortName">FPU_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/FPU_ready" type="logic">
+      <obj_property name="ElementShortName">FPU_ready</obj_property>
+      <obj_property name="ObjectShortName">FPU_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/syscall_result" type="array">
+      <obj_property name="ElementShortName">syscall_result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">syscall_result[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/syscall_valid_in" type="logic">
+      <obj_property name="ElementShortName">syscall_valid_in</obj_property>
+      <obj_property name="ObjectShortName">syscall_valid_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/syscall_valid_out" type="logic">
+      <obj_property name="ElementShortName">syscall_valid_out</obj_property>
+      <obj_property name="ObjectShortName">syscall_valid_out</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/syscall_data" type="array">
+      <obj_property name="ElementShortName">syscall_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">syscall_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/syscall_enable" type="logic">
+      <obj_property name="ElementShortName">syscall_enable</obj_property>
+      <obj_property name="ObjectShortName">syscall_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/syscall_ready" type="logic">
+      <obj_property name="ElementShortName">syscall_ready</obj_property>
+      <obj_property name="ObjectShortName">syscall_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/OS_status_in" type="array">
+      <obj_property name="ElementShortName">OS_status_in[3:0]</obj_property>
+      <obj_property name="ObjectShortName">OS_status_in[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/OS_status_write_enable" type="logic">
+      <obj_property name="ElementShortName">OS_status_write_enable</obj_property>
+      <obj_property name="ObjectShortName">OS_status_write_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/current_status" type="array">
+      <obj_property name="ElementShortName">current_status[3:0]</obj_property>
+      <obj_property name="ObjectShortName">current_status[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/register" type="array">
+      <obj_property name="ElementShortName">register[0:15][31:0]</obj_property>
+      <obj_property name="ObjectShortName">register[0:15][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/stack" type="array">
+      <obj_property name="ElementShortName">stack[0:1023][31:0]</obj_property>
+      <obj_property name="ObjectShortName">stack[0:1023][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/stack_pointer" type="array">
+      <obj_property name="ElementShortName">stack_pointer[31:0]</obj_property>
+      <obj_property name="ObjectShortName">stack_pointer[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/program_counter" type="array">
+      <obj_property name="ElementShortName">program_counter[31:0]</obj_property>
+      <obj_property name="ObjectShortName">program_counter[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/flags" type="array">
+      <obj_property name="ElementShortName">flags[3:0]</obj_property>
+      <obj_property name="ObjectShortName">flags[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/fetched_instruction" type="array">
+      <obj_property name="ElementShortName">fetched_instruction[47:0]</obj_property>
+      <obj_property name="ObjectShortName">fetched_instruction[47:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/decode_op_code" type="array">
+      <obj_property name="ElementShortName">decode_op_code[3:0]</obj_property>
+      <obj_property name="ObjectShortName">decode_op_code[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/decode_function_code" type="array">
+      <obj_property name="ElementShortName">decode_function_code[3:0]</obj_property>
+      <obj_property name="ObjectShortName">decode_function_code[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/decode_reg1" type="array">
+      <obj_property name="ElementShortName">decode_reg1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">decode_reg1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/decode_reg2" type="array">
+      <obj_property name="ElementShortName">decode_reg2[3:0]</obj_property>
+      <obj_property name="ObjectShortName">decode_reg2[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/decode_immediate" type="array">
+      <obj_property name="ElementShortName">decode_immediate[31:0]</obj_property>
+      <obj_property name="ObjectShortName">decode_immediate[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/execute_op_code" type="array">
+      <obj_property name="ElementShortName">execute_op_code[3:0]</obj_property>
+      <obj_property name="ObjectShortName">execute_op_code[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/execute_function_code" type="array">
+      <obj_property name="ElementShortName">execute_function_code[3:0]</obj_property>
+      <obj_property name="ObjectShortName">execute_function_code[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/execute_reg1" type="array">
+      <obj_property name="ElementShortName">execute_reg1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">execute_reg1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/execute_reg2" type="array">
+      <obj_property name="ElementShortName">execute_reg2[3:0]</obj_property>
+      <obj_property name="ObjectShortName">execute_reg2[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/execute_immediate" type="array">
+      <obj_property name="ElementShortName">execute_immediate[31:0]</obj_property>
+      <obj_property name="ObjectShortName">execute_immediate[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/execute_result" type="array">
+      <obj_property name="ElementShortName">execute_result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">execute_result[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/memory_op_code" type="array">
+      <obj_property name="ElementShortName">memory_op_code[3:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_op_code[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/memory_function_code" type="array">
+      <obj_property name="ElementShortName">memory_function_code[3:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_function_code[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/memory_reg1" type="array">
+      <obj_property name="ElementShortName">memory_reg1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_reg1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/memory_reg2" type="array">
+      <obj_property name="ElementShortName">memory_reg2[3:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_reg2[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/memory_immediate" type="array">
+      <obj_property name="ElementShortName">memory_immediate[31:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_immediate[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/memory_result" type="array">
+      <obj_property name="ElementShortName">memory_result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_result[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/memory_read" type="array">
+      <obj_property name="ElementShortName">memory_read[31:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_read[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/syscall_handling_state" type="array">
+      <obj_property name="ElementShortName">syscall_handling_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">syscall_handling_state[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/CPU/FPU_handling_state" type="array">
+      <obj_property name="ElementShortName">FPU_handling_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">FPU_handling_state[2:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/operating_system/serial_receiver/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
@@ -120,55 +493,51 @@
       <obj_property name="ElementShortName">BAUD_TICK[31:0]</obj_property>
       <obj_property name="ObjectShortName">BAUD_TICK[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/clk" type="logic">
+   <wvobject fp_name="/operating_system/serial_transmitter/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/reset" type="logic">
+   <wvobject fp_name="/operating_system/serial_transmitter/reset" type="logic">
       <obj_property name="ElementShortName">reset</obj_property>
       <obj_property name="ObjectShortName">reset</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/rx" type="logic">
-      <obj_property name="ElementShortName">rx</obj_property>
-      <obj_property name="ObjectShortName">rx</obj_property>
+   <wvobject fp_name="/operating_system/serial_transmitter/send" type="logic">
+      <obj_property name="ElementShortName">send</obj_property>
+      <obj_property name="ObjectShortName">send</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/data_out" type="array">
-      <obj_property name="ElementShortName">data_out[7:0]</obj_property>
-      <obj_property name="ObjectShortName">data_out[7:0]</obj_property>
+   <wvobject fp_name="/operating_system/serial_transmitter/data_in" type="array">
+      <obj_property name="ElementShortName">data_in[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/data_ready" type="logic">
-      <obj_property name="ElementShortName">data_ready</obj_property>
-      <obj_property name="ObjectShortName">data_ready</obj_property>
+   <wvobject fp_name="/operating_system/serial_transmitter/tx" type="logic">
+      <obj_property name="ElementShortName">tx</obj_property>
+      <obj_property name="ObjectShortName">tx</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/baud_counter" type="array">
+   <wvobject fp_name="/operating_system/serial_transmitter/busy" type="logic">
+      <obj_property name="ElementShortName">busy</obj_property>
+      <obj_property name="ObjectShortName">busy</obj_property>
+   </wvobject>
+   <wvobject fp_name="/operating_system/serial_transmitter/baud_counter" type="array">
       <obj_property name="ElementShortName">baud_counter[15:0]</obj_property>
       <obj_property name="ObjectShortName">baud_counter[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/bit_counter" type="array">
+   <wvobject fp_name="/operating_system/serial_transmitter/bit_counter" type="array">
       <obj_property name="ElementShortName">bit_counter[3:0]</obj_property>
       <obj_property name="ObjectShortName">bit_counter[3:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/shift_reg" type="array">
+   <wvobject fp_name="/operating_system/serial_transmitter/shift_reg" type="array">
       <obj_property name="ElementShortName">shift_reg[7:0]</obj_property>
       <obj_property name="ObjectShortName">shift_reg[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/rx_prev" type="logic">
-      <obj_property name="ElementShortName">rx_prev</obj_property>
-      <obj_property name="ObjectShortName">rx_prev</obj_property>
-   </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/receiving" type="logic">
-      <obj_property name="ElementShortName">receiving</obj_property>
-      <obj_property name="ObjectShortName">receiving</obj_property>
-   </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/CLOCK_FREQ" type="array">
+   <wvobject fp_name="/operating_system/serial_transmitter/CLOCK_FREQ" type="array">
       <obj_property name="ElementShortName">CLOCK_FREQ[31:0]</obj_property>
       <obj_property name="ObjectShortName">CLOCK_FREQ[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/BAUD_RATE" type="array">
+   <wvobject fp_name="/operating_system/serial_transmitter/BAUD_RATE" type="array">
       <obj_property name="ElementShortName">BAUD_RATE[31:0]</obj_property>
       <obj_property name="ObjectShortName">BAUD_RATE[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/operating_system/serial_receiver/BAUD_TICK" type="array">
+   <wvobject fp_name="/operating_system/serial_transmitter/BAUD_TICK" type="array">
       <obj_property name="ElementShortName">BAUD_TICK[31:0]</obj_property>
       <obj_property name="ObjectShortName">BAUD_TICK[31:0]</obj_property>
    </wvobject>

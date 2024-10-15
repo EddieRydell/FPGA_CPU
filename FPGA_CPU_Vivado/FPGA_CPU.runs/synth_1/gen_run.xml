@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35ticpg236-1L" LaunchTime="1728624990" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/operating_system.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7a35ticpg236-1L" LaunchTime="1729018796" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/operating_system.dcp">
   <File Type="PA-TCL" Name="operating_system.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="operating_system_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="operating_system_reports.tcl"/>
   <File Type="RDS-RDS" Name="operating_system.vds"/>
   <File Type="RDS-UTIL" Name="operating_system_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="operating_system_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="operating_system.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="operating_system_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="operating_system_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/op_codes.vh">
@@ -65,6 +68,20 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/instruction_memory.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/FPU.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/FPU_operations.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>

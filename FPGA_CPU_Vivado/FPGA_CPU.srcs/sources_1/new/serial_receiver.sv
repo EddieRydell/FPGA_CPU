@@ -23,6 +23,7 @@ module serial_receiver #(
     // Synchronous logic for receiving UART data
     always_ff @(posedge clk) begin
         if (reset) begin
+            data_out <= 0;
             baud_counter <= 0;
             bit_counter <= 0;
             data_ready <= 0;

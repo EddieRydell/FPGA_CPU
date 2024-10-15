@@ -50,9 +50,10 @@ module FPU(
             state <= IDLE;
             valid_out <= 1'b0;
             result_reg <= 32'b0;
-        end else begin
-            case (state)
-                IDLE: begin
+        end 
+        else begin
+            /*case (state)
+                *//*IDLE: begin
                     if (enable) begin
                         valid_in <= 1'b1;
                         state <= EXECUTE;
@@ -89,8 +90,8 @@ module FPU(
                         valid_out <= 1'b1;
                         state <= IDLE;
                     end
-                end
-            endcase
+                end*//*
+            endcase*/
         end
     end
 

@@ -82,6 +82,8 @@ read_verilog -library xil_defaultlib -sv {
   C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/serial_receiver.sv
   C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/serial_transmitter.sv
   C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/instruction_memory.sv
+  C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/FPU.sv
+  C:/Users/eddie/FPGA_CPU/FPGA_CPU_Vivado/FPGA_CPU.srcs/sources_1/new/FPU_operations.sv
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
