@@ -6,3 +6,57 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# Vivado generated files and directories
+*.jou
+*.log
+*.str
+*.wdb
+*.pb
+*.wcfg
+*.xml
+*.xpr
+*.rpt
+*.cache/
+*.hw/
+*.sim/
+*.runs/
+*.ip_user_files/
+*.ipdefs/
+*.xsc/
+*.dcp
+*.bin
+*.ltx
+
+# Synthesized output
+*.bit
+*.elf
+*.mem
+*.prm
+*.prx
+
+# Block design and IP core generated files
+.ip_user_files/
+.srcs/sources_1/bd/*
+.bd
+.component.xml
+.xtime
+
+# IP simulation files
+.sim/ip
+.sim/sim_1/
+.sim/behav/
+.sim/compile_order
+.sim/elaborate_order
+.sim/sim_order
+
+# Vivado checkpoints
+*.dcp
+*.xdc
+
+# Temporary files
+*.tmp
+*.backup
+
+# Vivado WebTalk telemetry files
+.webtalk/
