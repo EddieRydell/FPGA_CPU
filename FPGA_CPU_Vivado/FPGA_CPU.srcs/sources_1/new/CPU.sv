@@ -114,7 +114,7 @@ module CPU (
         if (OS_status_write_enable)
             current_status <= OS_status_in;
         if (reset) begin
-            register = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            register <= {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             program_counter <= 0;
             current_status <= CPU_IDLE;
             syscall_handling_state <= SYSCALL_IDLE;
