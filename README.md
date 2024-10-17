@@ -1,4 +1,4 @@
-# OS, Pipelined CPU, and Floating-Point Unit (FPU) Design
+# OS, Pipelined CPU, and Floating-Point Unit (FPU) FPGA Design
 
 ## Overview
 
