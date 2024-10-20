@@ -13,7 +13,7 @@ This component involves creating a **compiler** for a custom C-based programming
 
 ## System Architecture
 
-The system consists of the following major components:
+The architecture on the FPGA consists of the following major components:
 
 1. **Top-Level OS Module**  
    The OS module manages the overall state of the CPU and its communication with external devices (such as UART for receiving instructions). The OS handles system calls and transitions the CPU between different states.
