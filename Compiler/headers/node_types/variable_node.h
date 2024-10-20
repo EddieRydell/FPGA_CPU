@@ -1,4 +1,5 @@
 #pragma once
+
 #include "expression_node.h"
 #include <string>
 #include <iostream>
@@ -15,3 +16,4 @@ public:
 private:
     std::string name;
 };
+

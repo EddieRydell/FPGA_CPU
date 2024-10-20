@@ -1,4 +1,5 @@
 #pragma once
+
 #include "statement_node.h"
 #include "expression_node.h"
 #include <memory>
@@ -7,8 +8,8 @@
 
 class return_node : public statement_node {
 public:
-    explicit return_node(std::shared_ptr<expression_node> expression)
-            : expression(std::move(expression)) {}
+    explicit return_node(std::shared_ptr<expression_node> expr)
+            : expression(std::move(expr)) {}
 
     void display() const override {
         std::cout << "return ";
@@ -19,4 +20,3 @@ public:
 private:
     std::shared_ptr<expression_node> expression;
 };
-

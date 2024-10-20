@@ -20,7 +20,7 @@ private:
     token current_token() const;
     void advance();
     bool match(token_type type);
-    bool is_type_keyword(token_type type);
+    static bool is_type_keyword(token_type type);
 
     // Parsing functions
     std::shared_ptr<function_node> parse_function();

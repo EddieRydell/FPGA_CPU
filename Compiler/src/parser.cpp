@@ -1,3 +1,6 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "misc-no-recursion"
+
 #include "parser.h"
 #include "node_types/ast_node_types.h"
 #include <iostream>
@@ -423,3 +426,4 @@ std::shared_ptr<expression_node> parser::parse_primary_expression() {
     return nullptr;
 }
 
+#pragma clang diagnostic pop

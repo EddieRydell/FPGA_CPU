@@ -23,4 +23,10 @@ add_executable(Compiler
         headers/node_types/program_node.h
         headers/node_types/return_node.h
         headers/node_types/variable_node.h
+        headers/node_types/parameter_node.h
+        headers/node_types/scope_node.h
+        headers/node_types/declaration_node.h
+        headers/node_types/if_node.h
+        headers/node_types/while_node.h
+        headers/node_types/unary_expression_node.h
 )
