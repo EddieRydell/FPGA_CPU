@@ -29,6 +29,8 @@ typedef enum logic [3:0] {
 `define OP_SYSCALL  4'ha
 `define OP_BINARYF  4'hb
 `define OP_UNARYF   4'hc
+`define OP_LOAD     4'hd
+`define OP_STORE    4'he
 
 // function codes for binary operators
 `define FUN_ADD     4'h0
