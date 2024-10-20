@@ -1,8 +1,15 @@
-# Operating System, Pipelined CPU, and Floating-Point Unit (FPU) FPGA Design
+# Compiler, Assembler, and FPGA Architecture Implementation
 
-## Overview
+This project has 3 main components:
 
-This project implements a **top-level operating system (OS)**, a **pipelined CPU**, and a **Floating-Point Unit (FPU)**. The system is designed to perform both integer and floating-point operations with support for floating-point arithmetic based on the **IEEE 754** standard. The **OS** controls the **CPU** and its interaction with the **FPU**, allowing for controlled execution of programs through the operating system.
+### 1. **Pipelined CPU and FPU implemented on an FPGA board**
+This portion of the project implements a **top-level operating system (OS)**, a **pipelined CPU**, and a **Floating-Point Unit (FPU)**. The system is designed to perform both integer and floating-point operations with support for floating-point arithmetic based on the **IEEE 754** standard. The **OS** controls the **CPU** and its interaction with the **FPU**, allowing for controlled execution of programs through the operating system.
+
+### 2. **Assembler for the CPU's custom instruction set**
+Because I created a custom instruction set for this project, I also had to create a custom **assembler**. In the `Assembler` directory of this repository, there is a **C++** program made to assemble programs and then transmit them over **UART** to the FPGA. More details on the custom instruction set can be found [here](./path/to/instruction_set.md).
+
+### 3. **Compiler for a custom C-based language**
+This component involves creating a **compiler** for a custom C-based programming language designed to interface with the **CPU** and **FPU**. The compiler translates high-level C-like programs into an intermediate representation, and then ultimately into an assembly language that uses the instruction set used by the CPU. More details on the compiler and its features can be found in the `Compiler` directory.
 
 ## System Architecture
 
@@ -58,7 +65,7 @@ Some op codes also have corresponding function codes, such as OP_BINARY, which t
 The rest of the function codes corresponding to different op codes are also found in opcodes.vh. This header also includes a list of each possible state of the CPU, as well as different flags that can be set by the ALU. 
 
 ## Assembler
-Because I created a custom instruction set for this project, I also had to create a custom **assembler**. In the Assembler file of this repository, there is a **C++** program made to assemble programs and then transmit them over **UART** to the FPGA. The format for my custom assembly language is demonstrated in the following code snippet to add two values and display their result on the FPGA led array:
+
 <pre><code>
 mov $65535 %r0      ; registers are prefixed with '%'
 mov $65535 %r1      ; immediate values are prefixed with '$'
