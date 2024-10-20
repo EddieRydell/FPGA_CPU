@@ -21,7 +21,7 @@ The CPU architecture is 32-bit and supports reading and writing from main memory
 `define OP_LOAD     4'hd
 `define OP_STORE    4'he
 </code></pre>
-Some op codes also have corresponding function codes, such as OP_BINARY, which takes different binary operations and applies them to the registers specified in the arguments. These are definned in `opcodes.vh` as:
+Some op codes also have corresponding function codes, such as OP_BINARY, which takes different binary operations and applies them to the registers specified in the arguments. These are defined in `opcodes.vh` as:
 <pre><code>// function codes for binary operators
 `define FUN_ADD     4'h0
 `define FUN_SUB     4'h1
