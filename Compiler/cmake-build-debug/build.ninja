@@ -52,14 +52,23 @@ build cmake_object_order_depends_target_Compiler: phony || CMakeFiles/Compiler.d
 build CMakeFiles/Compiler.dir/main.cpp.obj: CXX_COMPILER__Compiler_unscanned_Debug C$:/Users/eddie/FPGA_CPU/Compiler/main.cpp || cmake_object_order_depends_target_Compiler
   DEP_FILE = CMakeFiles\Compiler.dir\main.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/eddie/FPGA_CPU/Compiler/headers
   OBJECT_DIR = CMakeFiles\Compiler.dir
   OBJECT_FILE_DIR = CMakeFiles\Compiler.dir
 
-build CMakeFiles/Compiler.dir/lexer.cpp.obj: CXX_COMPILER__Compiler_unscanned_Debug C$:/Users/eddie/FPGA_CPU/Compiler/lexer.cpp || cmake_object_order_depends_target_Compiler
-  DEP_FILE = CMakeFiles\Compiler.dir\lexer.cpp.obj.d
+build CMakeFiles/Compiler.dir/src/tokenizer.cpp.obj: CXX_COMPILER__Compiler_unscanned_Debug C$:/Users/eddie/FPGA_CPU/Compiler/src/tokenizer.cpp || cmake_object_order_depends_target_Compiler
+  DEP_FILE = CMakeFiles\Compiler.dir\src\tokenizer.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/eddie/FPGA_CPU/Compiler/headers
   OBJECT_DIR = CMakeFiles\Compiler.dir
-  OBJECT_FILE_DIR = CMakeFiles\Compiler.dir
+  OBJECT_FILE_DIR = CMakeFiles\Compiler.dir\src
+
+build CMakeFiles/Compiler.dir/src/parser.cpp.obj: CXX_COMPILER__Compiler_unscanned_Debug C$:/Users/eddie/FPGA_CPU/Compiler/src/parser.cpp || cmake_object_order_depends_target_Compiler
+  DEP_FILE = CMakeFiles\Compiler.dir\src\parser.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/eddie/FPGA_CPU/Compiler/headers
+  OBJECT_DIR = CMakeFiles\Compiler.dir
+  OBJECT_FILE_DIR = CMakeFiles\Compiler.dir\src
 
 
 # =============================================================================
@@ -69,7 +78,7 @@ build CMakeFiles/Compiler.dir/lexer.cpp.obj: CXX_COMPILER__Compiler_unscanned_De
 #############################################
 # Link the executable Compiler.exe
 
-build Compiler.exe: CXX_EXECUTABLE_LINKER__Compiler_Debug CMakeFiles/Compiler.dir/main.cpp.obj CMakeFiles/Compiler.dir/lexer.cpp.obj
+build Compiler.exe: CXX_EXECUTABLE_LINKER__Compiler_Debug CMakeFiles/Compiler.dir/main.cpp.obj CMakeFiles/Compiler.dir/src/tokenizer.cpp.obj CMakeFiles/Compiler.dir/src/parser.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Compiler.dir
