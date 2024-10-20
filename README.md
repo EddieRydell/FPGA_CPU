@@ -64,18 +64,6 @@ Some op codes also have corresponding function codes, such as OP_BINARY, which t
 </code></pre>
 The rest of the function codes corresponding to different op codes are also found in opcodes.vh. This header also includes a list of each possible state of the CPU, as well as different flags that can be set by the ALU. 
 
-## Assembler
-
-<pre><code>
-mov $65535 %r0      ; registers are prefixed with '%'
-mov $65535 %r1      ; immediate values are prefixed with '$'
-add %r1 %r0
-syscall led_write   ; different syscalls are hardcoded into my assembler
-nop
-hlt
-</code></pre>
-This assembler is still not complete. I plan to flesh it out more soon, and possibly even write my own compiler in the future.
-
 ## Building the Project
 Unfortunately, because this project requires specific hardware, it is almost impossible for someone to build it themself. 
 
