@@ -48,5 +48,4 @@ syscall led_write   ; different syscalls are hardcoded into my assembler
 nop
 hlt
 </code></pre>
-This assembler is still not complete. I plan to flesh it out more soon, and possibly even write my own compiler in the future.
 
