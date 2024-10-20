@@ -12,8 +12,7 @@ add_executable(Assembler
         headers/program.h
         src/uart_transmitter.cpp
         headers/uart_transmitter.h
-        src/compiler.cpp
-        headers/compiler.h)
+)
 
 # Link with required Windows libraries
 target_link_libraries(Assembler

@@ -73,12 +73,6 @@ build CMakeFiles/Assembler.dir/src/uart_transmitter.cpp.obj: CXX_COMPILER__Assem
   OBJECT_DIR = CMakeFiles\Assembler.dir
   OBJECT_FILE_DIR = CMakeFiles\Assembler.dir\src
 
-build CMakeFiles/Assembler.dir/src/compiler.cpp.obj: CXX_COMPILER__Assembler_unscanned_Debug C$:/Users/eddie/FPGA_CPU/Assembler/src/compiler.cpp || cmake_object_order_depends_target_Assembler
-  DEP_FILE = CMakeFiles\Assembler.dir\src\compiler.cpp.obj.d
-  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\Assembler.dir
-  OBJECT_FILE_DIR = CMakeFiles\Assembler.dir\src
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Assembler
@@ -87,7 +81,7 @@ build CMakeFiles/Assembler.dir/src/compiler.cpp.obj: CXX_COMPILER__Assembler_uns
 #############################################
 # Link the executable Assembler.exe
 
-build Assembler.exe: CXX_EXECUTABLE_LINKER__Assembler_Debug CMakeFiles/Assembler.dir/main.cpp.obj CMakeFiles/Assembler.dir/src/instruction.cpp.obj CMakeFiles/Assembler.dir/src/program.cpp.obj CMakeFiles/Assembler.dir/src/uart_transmitter.cpp.obj CMakeFiles/Assembler.dir/src/compiler.cpp.obj
+build Assembler.exe: CXX_EXECUTABLE_LINKER__Assembler_Debug CMakeFiles/Assembler.dir/main.cpp.obj CMakeFiles/Assembler.dir/src/instruction.cpp.obj CMakeFiles/Assembler.dir/src/program.cpp.obj CMakeFiles/Assembler.dir/src/uart_transmitter.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32  -luser32  -lgdi32  -lwinspool  -lshell32  -lole32  -loleaut32  -luuid  -lcomdlg32  -ladvapi32  -lsetupapi  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Assembler.dir

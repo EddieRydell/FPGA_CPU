@@ -2,19 +2,28 @@
 
 #include "tokenizer.h"
 #include "node_types/ast_node_types.h"
+
 #include <memory>
 #include <vector>
 #include <string>
 
+// Custom exception class for parsing errors
+class parser_exception : public std::runtime_error {
+public:
+    explicit parser_exception(const std::string &arg) : runtime_error(arg) {};
+};
+
 class parser {
 public:
-    parser(const std::vector<token>& tokens);
+    explicit parser(const std::vector<token>& tokens);
 
     std::shared_ptr<program_node> parse_program(); // Parse the entire program
 
 private:
     std::vector<token> tokens;
     size_t current_token_index;
+
+    void error(const std::string& message);
 
     // Token utilities
     token current_token() const;
@@ -39,7 +48,6 @@ private:
 
     // Expression parsing with operator precedence
     std::shared_ptr<expression_node> parse_expression();
-    std::shared_ptr<expression_node> parse_assignment_expression();
     std::shared_ptr<expression_node> parse_logical_or_expression();
     std::shared_ptr<expression_node> parse_logical_and_expression();
     std::shared_ptr<expression_node> parse_equality_expression();
@@ -48,6 +56,5 @@ private:
     std::shared_ptr<expression_node> parse_multiplicative_expression();
     std::shared_ptr<expression_node> parse_unary_expression();
     std::shared_ptr<expression_node> parse_primary_expression();
+    std::vector<std::shared_ptr<expression_node>> parse_argument_list();
 };
-
-

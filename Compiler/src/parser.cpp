@@ -3,7 +3,7 @@
 
 #include "parser.h"
 #include "node_types/ast_node_types.h"
-#include <iostream>
+#include <stdexcept>
 
 parser::parser(const std::vector<token>& tokens) : tokens(tokens), current_token_index(0) {}
 
@@ -42,9 +42,6 @@ std::shared_ptr<program_node> parser::parse_program() {
         auto func = parse_function();
         if (func) {
             program->add_child(func);
-        } else {
-            // Error handling: skip to the next token
-            advance();
         }
     }
 
@@ -54,38 +51,32 @@ std::shared_ptr<program_node> parser::parse_program() {
 // Parse a function definition
 std::shared_ptr<function_node> parser::parse_function() {
     if (!match(token_type::function_kw)) {
-        std::cerr << "Expected 'function' keyword.\n";
-        return nullptr;
+        error("Expected 'function' keyword.");
     }
 
     token identifier = current_token();
     if (!match(token_type::identifier)) {
-        std::cerr << "Expected function name.\n";
-        return nullptr;
+        error("Expected function name.");
     }
 
     if (!match(token_type::lparen)) {
-        std::cerr << "Expected '('.\n";
-        return nullptr;
+        error("Expected '(' after function name.");
     }
 
     auto parameters = parse_parameter_list();
 
     if (!match(token_type::rparen)) {
-        std::cerr << "Expected ')'.\n";
-        return nullptr;
+        error("Expected ')' after parameter list.");
     }
 
     if (!match(token_type::lbrace)) {
-        std::cerr << "Expected '{'.\n";
-        return nullptr;
+        error("Expected '{' at the beginning of function body.");
     }
 
     auto body = parse_scope();
 
     if (!match(token_type::rbrace)) {
-        std::cerr << "Expected '}' after function body.\n";
-        return nullptr;
+        error("Expected '}' after function body.");
     }
 
     auto func_node = std::make_shared<function_node>(identifier.value, parameters, body);
@@ -101,9 +92,6 @@ std::vector<std::shared_ptr<parameter_node>> parser::parse_parameter_list() {
             auto param = parse_typed_identifier();
             if (param) {
                 parameters.push_back(param);
-            } else {
-                std::cerr << "Invalid parameter.\n";
-                break;
             }
         } while (match(token_type::comma));
     }
@@ -111,18 +99,16 @@ std::vector<std::shared_ptr<parameter_node>> parser::parse_parameter_list() {
     return parameters;
 }
 
-// Parse a typed identifier (used in parameter list and declarations)
+// Parse a typed identifier
 std::shared_ptr<parameter_node> parser::parse_typed_identifier() {
     std::string type = parse_type();
     if (type.empty()) {
-        std::cerr << "Expected type in parameter.\n";
-        return nullptr;
+        error("Expected type in parameter.");
     }
 
     token id_token = current_token();
     if (!match(token_type::identifier)) {
-        std::cerr << "Expected identifier in parameter.\n";
-        return nullptr;
+        error("Expected identifier in parameter.");
     }
 
     return std::make_shared<parameter_node>(type, id_token.value);
@@ -134,11 +120,12 @@ std::string parser::parse_type() {
     if (match(token_type::float_kw)) return "float";
     if (match(token_type::bool_kw)) return "bool";
     if (match(token_type::string_kw)) return "string";
-    if (match(token_type::custom_type_kw)) return current_token().value; // For custom types
+    // Handle custom types
+    if (match(token_type::custom_type_kw)) return current_token().value;
     return "";
 }
 
-// Parse a scope (a block of statements)
+// Parse a scope (block of statements)
 std::shared_ptr<scope_node> parser::parse_scope() {
     auto scope = std::make_shared<scope_node>();
 
@@ -146,16 +133,6 @@ std::shared_ptr<scope_node> parser::parse_scope() {
         auto stmt = parse_statement();
         if (stmt) {
             scope->add_statement(stmt);
-        } else {
-            // Error handling: skip to next semicolon or closing brace
-            while (current_token().type != token_type::semicolon &&
-                   current_token().type != token_type::rbrace &&
-                   current_token().type != token_type::end_of_file) {
-                advance();
-            }
-            if (current_token().type == token_type::semicolon) {
-                advance();
-            }
         }
     }
 
@@ -174,64 +151,57 @@ std::shared_ptr<statement_node> parser::parse_statement() {
         return parse_while_statement();
     } else if (current_token().type == token_type::identifier) {
         return parse_assignment_statement();
+    } else {
+        error("Invalid statement.");
     }
-
-    std::cerr << "Invalid statement.\n";
-    return nullptr;
+    return nullptr; // Unreachable, but included to satisfy the compiler
 }
 
-// Parse a declaration statement (e.g., int x;)
+// Parse a declaration statement
 std::shared_ptr<statement_node> parser::parse_declaration_statement() {
     std::string type = parse_type();
     if (type.empty()) {
-        std::cerr << "Expected type in declaration.\n";
-        return nullptr;
+        error("Expected type in declaration.");
     }
 
     token id_token = current_token();
     if (!match(token_type::identifier)) {
-        std::cerr << "Expected identifier in declaration.\n";
-        return nullptr;
+        error("Expected identifier in declaration.");
     }
 
     if (!match(token_type::semicolon)) {
-        std::cerr << "Expected ';' at the end of declaration.\n";
-        return nullptr;
+        error("Expected ';' at the end of declaration.");
     }
 
     return std::make_shared<declaration_node>(type, id_token.value);
 }
 
-// Parse an assignment statement (e.g., x = a + b;)
+// Parse an assignment statement
 std::shared_ptr<statement_node> parser::parse_assignment_statement() {
     token id_token = current_token();
     if (!match(token_type::identifier)) {
-        std::cerr << "Expected identifier in assignment.\n";
-        return nullptr;
+        error("Expected identifier in assignment.");
     }
 
     if (!match(token_type::assign)) {
-        std::cerr << "Expected '=' for assignment.\n";
-        return nullptr;
+        error("Expected '=' in assignment.");
     }
 
     auto expr = parse_expression();
 
     if (!match(token_type::semicolon)) {
-        std::cerr << "Expected ';' at the end of assignment.\n";
-        return nullptr;
+        error("Expected ';' at the end of assignment.");
     }
 
     return std::make_shared<assignment_node>(id_token.value, expr);
 }
 
-// Parse a return statement (e.g., return a + b;)
+// Parse a return statement
 std::shared_ptr<statement_node> parser::parse_return_statement() {
     auto expr = parse_expression();
 
     if (!match(token_type::semicolon)) {
-        std::cerr << "Expected ';' after return statement.\n";
-        return nullptr;
+        error("Expected ';' after return statement.");
     }
 
     return std::make_shared<return_node>(expr);
@@ -240,27 +210,23 @@ std::shared_ptr<statement_node> parser::parse_return_statement() {
 // Parse an if statement
 std::shared_ptr<statement_node> parser::parse_if_statement() {
     if (!match(token_type::lparen)) {
-        std::cerr << "Expected '(' after 'if'.\n";
-        return nullptr;
+        error("Expected '(' after 'if'.");
     }
 
     auto condition = parse_expression();
 
     if (!match(token_type::rparen)) {
-        std::cerr << "Expected ')' after condition.\n";
-        return nullptr;
+        error("Expected ')' after condition.");
     }
 
     if (!match(token_type::lbrace)) {
-        std::cerr << "Expected '{' after 'if' condition.\n";
-        return nullptr;
+        error("Expected '{' after 'if' condition.");
     }
 
     auto body = parse_scope();
 
     if (!match(token_type::rbrace)) {
-        std::cerr << "Expected '}' after 'if' body.\n";
-        return nullptr;
+        error("Expected '}' after 'if' body.");
     }
 
     return std::make_shared<if_node>(condition, body);
@@ -269,27 +235,23 @@ std::shared_ptr<statement_node> parser::parse_if_statement() {
 // Parse a while statement
 std::shared_ptr<statement_node> parser::parse_while_statement() {
     if (!match(token_type::lparen)) {
-        std::cerr << "Expected '(' after 'while'.\n";
-        return nullptr;
+        error("Expected '(' after 'while'.");
     }
 
     auto condition = parse_expression();
 
     if (!match(token_type::rparen)) {
-        std::cerr << "Expected ')' after condition.\n";
-        return nullptr;
+        error("Expected ')' after condition.");
     }
 
     if (!match(token_type::lbrace)) {
-        std::cerr << "Expected '{' after 'while' condition.\n";
-        return nullptr;
+        error("Expected '{' after 'while' condition.");
     }
 
     auto body = parse_scope();
 
     if (!match(token_type::rbrace)) {
-        std::cerr << "Expected '}' after 'while' body.\n";
-        return nullptr;
+        error("Expected '}' after 'while' body.");
     }
 
     return std::make_shared<while_node>(condition, body);
@@ -297,22 +259,14 @@ std::shared_ptr<statement_node> parser::parse_while_statement() {
 
 // Parse an expression
 std::shared_ptr<expression_node> parser::parse_expression() {
-    return parse_assignment_expression();
-}
-
-// Parse assignment expressions (if any)
-std::shared_ptr<expression_node> parser::parse_assignment_expression() {
-    auto left = parse_logical_or_expression();
-
-    // For now, assume no assignments in expressions (since assignments are statements)
-    return left;
+    return parse_logical_or_expression();
 }
 
 // Parse logical OR expressions
 std::shared_ptr<expression_node> parser::parse_logical_or_expression() {
     auto left = parse_logical_and_expression();
 
-    while (match(token_type::or_op)) { // Assuming '||' is represented as or_op
+    while (match(token_type::or_op)) {
         std::string op = "||";
         auto right = parse_logical_and_expression();
         left = std::make_shared<binary_expression_node>(op, left, right);
@@ -325,7 +279,7 @@ std::shared_ptr<expression_node> parser::parse_logical_or_expression() {
 std::shared_ptr<expression_node> parser::parse_logical_and_expression() {
     auto left = parse_equality_expression();
 
-    while (match(token_type::and_op)) { // Assuming '&&' is represented as and_op
+    while (match(token_type::and_op)) {
         std::string op = "&&";
         auto right = parse_equality_expression();
         left = std::make_shared<binary_expression_node>(op, left, right);
@@ -398,7 +352,8 @@ std::shared_ptr<expression_node> parser::parse_multiplicative_expression() {
 
 // Parse unary expressions
 std::shared_ptr<expression_node> parser::parse_unary_expression() {
-    if (current_token().type == token_type::minus) {
+    if (current_token().type == token_type::minus ||
+        current_token().type == token_type::not_op) {
         std::string op = current_token().value;
         advance();
         auto operand = parse_unary_expression();
@@ -407,23 +362,61 @@ std::shared_ptr<expression_node> parser::parse_unary_expression() {
     return parse_primary_expression();
 }
 
-// Parse primary expressions
 std::shared_ptr<expression_node> parser::parse_primary_expression() {
     if (match(token_type::number)) {
         return std::make_shared<number_node>(tokens[current_token_index - 1].value);
     } else if (match(token_type::identifier)) {
-        return std::make_shared<variable_node>(tokens[current_token_index - 1].value);
+        std::string name = tokens[current_token_index - 1].value;
+
+        if (match(token_type::lparen)) {
+            // Parse function call arguments
+            auto arguments = parse_argument_list();
+
+            if (!match(token_type::rparen)) {
+                error("Expected ')' after function call.");
+            }
+
+            // Create a function_call_node
+            return std::make_shared<function_call_node>(name, arguments);
+        }
+
+        return std::make_shared<variable_node>(name);
     } else if (match(token_type::lparen)) {
         auto expr = parse_expression();
         if (!match(token_type::rparen)) {
-            std::cerr << "Expected ')' after expression.\n";
-            return nullptr;
+            error("Expected ')' after expression.");
         }
         return expr;
     }
 
-    std::cerr << "Invalid primary expression.\n";
-    return nullptr;
+    error("Invalid primary expression.");
+    return nullptr; // Unreachable, but included to satisfy the compiler
+}
+
+
+
+std::vector<std::shared_ptr<expression_node>> parser::parse_argument_list() {
+    std::vector<std::shared_ptr<expression_node>> arguments;
+
+    if (current_token().type != token_type::rparen) {
+        do {
+            auto arg = parse_expression();
+            if (arg) {
+                arguments.push_back(arg);
+            } else {
+                error("Invalid argument in function call.");
+            }
+        } while (match(token_type::comma));
+    }
+
+    return arguments;
+}
+
+// Error handling function
+void parser::error(const std::string& message) {
+    token tok = current_token();
+    std::string error_message = "Parsing error at line " + std::to_string(tok.line) + ": " + message;
+    throw parser_exception(error_message);
 }
 
 #pragma clang diagnostic pop

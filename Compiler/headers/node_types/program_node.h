@@ -8,7 +8,7 @@
 
 class program_node : public ast_node {
 public:
-    void add_child(std::shared_ptr<ast_node> child) {
+    void add_child(const std::shared_ptr<ast_node>& child) {
         children.push_back(child);
     }
 
