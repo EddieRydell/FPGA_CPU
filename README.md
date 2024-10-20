@@ -9,7 +9,7 @@ This portion of the project implements a **top-level operating system (OS)**, a 
 Because I created a custom instruction set for this project, I also had to create a custom **assembler**. In the `Assembler` directory of this repository, there is a **C++** program made to assemble programs and then transmit them over **UART** to the FPGA. More details on the custom instruction set can be found [here](./Assembler/README_Assembler.md).
 
 ### 3. **Compiler for a custom C-based language**
-This component involves creating a **compiler** for a custom C-based programming language designed to interface with the **CPU** and **FPU**. The compiler translates high-level C-like programs into an intermediate representation, and then ultimately into an assembly language that uses the instruction set used by the CPU. More details on the compiler and its features can be found [here](./Assembler/README_Compiler.md).
+This component involves creating a **compiler** for a custom C-based programming language designed to interface with the **CPU** and **FPU**. The compiler translates high-level C-like programs into an intermediate representation, and then ultimately into an assembly language that uses the instruction set used by the CPU. More details on the compiler and its features can be found [here](./Compiler/README_Compiler.md).
 
 ## System Architecture
 
