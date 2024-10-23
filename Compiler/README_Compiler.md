@@ -1,4 +1,4 @@
-# Custom C-Based Compiler
+# Custom Compiler
 
 My compiler is made to implement a programming language that I have decided to call ***C--*** (C minus minus). This is due to the fact that this language lacks many of the features of **C**, but I plan to continue adding more functionality to the language as time goes on (and even possibly experiment with new features like custom memory models for pointers/integers).
 
@@ -11,7 +11,7 @@ The lexer (lexer.cpp) converts the input source code into a series of tokens, wh
 
 ### 2. Parsing and Abstract Syntax Tree (AST) generation
 
-The parser (parser.cpp) processes the token stream and constructs an Abstract Syntax Tree (AST), which represents the structure of the input program.
+The parser (parser.cpp) processes the token stream and constructs an Abstract Syntax Tree (AST), which represents the structure of the input program. The documentation for the grammar of this language can be found [here](./grammar.md).
 
 ### 3. Conversion to an Intermediate Representation (IR)
 

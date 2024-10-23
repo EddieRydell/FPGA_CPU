@@ -52,8 +52,8 @@ token tokenizer::tokenize_identifier_or_keyword() {
     if (lexeme == "else") return token{token_type::else_kw, lexeme, current_line};
     if (lexeme == "while") return token{token_type::while_kw, lexeme, current_line};
     if (lexeme == "return") return token{token_type::return_kw, lexeme, current_line};
-    if (lexeme == "int") return token{token_type::int_kw, lexeme, current_line};
-    if (lexeme == "float") return token{token_type::float_kw, lexeme, current_line};
+    if (lexeme == "i32") return token{token_type::int_kw, lexeme, current_line};
+    if (lexeme == "f32") return token{token_type::float_kw, lexeme, current_line};
     if (lexeme == "bool") return token{token_type::bool_kw, lexeme, current_line};
     if (lexeme == "string") return token{token_type::string_kw, lexeme, current_line};
     // Add any other keywords or types as needed

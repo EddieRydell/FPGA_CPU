@@ -393,8 +393,6 @@ std::shared_ptr<expression_node> parser::parse_primary_expression() {
     return nullptr; // Unreachable, but included to satisfy the compiler
 }
 
-
-
 std::vector<std::shared_ptr<expression_node>> parser::parse_argument_list() {
     std::vector<std::shared_ptr<expression_node>> arguments;
 

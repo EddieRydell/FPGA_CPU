@@ -1,3 +1,9 @@
+C:/Users/eddie/FPGA_CPU/Compiler/cmake-build-debug/CMakeFiles/intrinsics_gen.dir
+C:/Users/eddie/FPGA_CPU/Compiler/cmake-build-debug/CMakeFiles/omp_gen.dir
+C:/Users/eddie/FPGA_CPU/Compiler/cmake-build-debug/CMakeFiles/acc_gen.dir
+C:/Users/eddie/FPGA_CPU/Compiler/cmake-build-debug/CMakeFiles/ARMTargetParserTableGen.dir
+C:/Users/eddie/FPGA_CPU/Compiler/cmake-build-debug/CMakeFiles/AArch64TargetParserTableGen.dir
+C:/Users/eddie/FPGA_CPU/Compiler/cmake-build-debug/CMakeFiles/RISCVTargetParserTableGen.dir
 C:/Users/eddie/FPGA_CPU/Compiler/cmake-build-debug/CMakeFiles/Compiler.dir
 C:/Users/eddie/FPGA_CPU/Compiler/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/eddie/FPGA_CPU/Compiler/cmake-build-debug/CMakeFiles/rebuild_cache.dir

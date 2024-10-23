@@ -11,14 +11,14 @@
 int main() {
     // Define a sample input program as a string
     std::string input_program = R"(
-        function factorial(int n) {
+        function factorial(i32 n) {
             if (n <= 1) {
                 return 1;
             }
             return n * factorial(n - 1);
         }
         function main() {
-            int result;
+            i32 result;
             result = factorial(5);
             return result;
         }

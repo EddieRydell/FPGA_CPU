@@ -6,10 +6,9 @@
 {program}        ::= {function_list}
 {function_list}  ::= {function} {function_list} | ε
 
-{function}              ::= "function" {identifier} "(" {parameter_list} ")" "{" {scope} "}"
-{parameter_list}        ::= {typed_identifier_list} | ε
-{typed_identifier_list} ::= {typed_identifier} ("," {typed_identifier})*
-{typed_identifier}      ::= {type} {identifier}
+{function}              ::= "function" {identifier} "::" "(" {typed_parameter_list} ")" "->" {type} "{" {scope} "}"
+{typed_parameter_list}  ::= {typed_parameter} ("," {typed_parameter})* | ε
+{typed_parameter}       ::= {type} {identifier}
 
 {function_call} ::= {identifier} "(" {argument_list} ")"
 {argument_list} ::= {expression} ("," {expression})* | ε
@@ -21,7 +20,6 @@
                    | {return_statement} ";"
                    | {if_statement}
                    | {while_statement}
-
 
 {declaration}        ::= {type} {identifier}
 {assignment}         ::= {identifier} "=" {expression}

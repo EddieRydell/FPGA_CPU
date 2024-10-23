@@ -3,6 +3,13 @@ project(Compiler)
 
 set(CMAKE_CXX_STANDARD 17)
 
+# Find LLVM package
+set(LLVM_DIR "C:/Users/eddie/LLVM/clang+llvm-19.1.2-x86_64-pc-windows-msvc/lib/cmake/llvm")
+find_package(LLVM REQUIRED CONFIG)
+include_directories(${LLVM_INCLUDE_DIRS})
+add_definitions(${LLVM_DEFINITIONS})
+llvm_map_components_to_libnames(LLVM_LIBS support core irreader)
+
 # Add include directories for headers
 include_directories(headers)
 
@@ -30,4 +37,8 @@ add_executable(Compiler
         headers/node_types/while_node.h
         headers/node_types/unary_expression_node.h
         headers/node_types/function_call_node.h
+        src/IR_generator.cpp
+        headers/IR_generator.h
 )
+
+target_link_libraries(Compiler ${LLVM_LIBS})
